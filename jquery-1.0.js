@@ -31,10 +31,14 @@ function jQuery(a,c) {
 		return $( c ).find(a);
 	
 	// If the context is global, return a new object
+	//jquery("#example") 第一次 进入  返回 new Jquery(),
+	//进入jQuery.find
 	if ( window == this )
 		return new jQuery(a,c);
 
 	// Handle HTML strings
+	//处理html字符串
+	//以非<开头 当中<> 非>结束
 	var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
 	if ( m ) a = jQuery.clean( [ m[1] ] );
 
@@ -47,6 +51,7 @@ function jQuery(a,c) {
 		jQuery.find( a, c ) );
 
   // See if an extra function was provided
+  //参数里是否有扩展方法提供
 	var fn = arguments[ arguments.length - 1 ];
 	
 	// If so, execute it in context
@@ -55,6 +60,7 @@ function jQuery(a,c) {
 }
 
 // Map over the $ in case of overwrite
+//如果$被重写,那么映射到_$上
 if ( $ )
 	jQuery._$ = $;
 
