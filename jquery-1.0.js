@@ -48,6 +48,7 @@ function jQuery(a,c) {
 		jQuery.merge( a, [] ) :
 
 		// Find the matching elements and save them for later
+		//调用jQuery 静态方法 通过Jquery.extend扩展
 		jQuery.find( a, c ) );
 
   // See if an extra function was provided
@@ -56,7 +57,7 @@ function jQuery(a,c) {
 	
 	// If so, execute it in context
 	if ( fn && fn.constructor == Function )
-		this.each(fn);
+		this.each(fn);//通过jQuery.prototype  原型链
 }
 
 // Map over the $ in case of overwrite
