@@ -581,7 +581,7 @@ jQuery.extend({
 					r = ret = [context];
 					t = " " + t.substr(1,t.length);
 				} else {
-					var re2 = /^([#.]?)([a-z0-9\\*_-]*)/i;
+					var re2 = /^([#.]?)([a-z0-9\\*_-]*)/i;//# »ò .¿ªÍ· 
 					var m = re2.exec(t);
 		
 					if ( m[1] == "#" ) {
