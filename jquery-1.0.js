@@ -15,7 +15,8 @@
 window.undefined = window.undefined;
 function jQuery(a,c) {
 
-	// Shortcut for document ready (because $(document).each() is silly)
+    // Shortcut for document ready (because $(document).each() is silly)
+    //处理 ready函数,$(function(){})
 	if ( a && a.constructor == Function && jQuery.fn.ready )
 		return jQuery(document).ready(a);
 
@@ -23,10 +24,13 @@ function jQuery(a,c) {
 	a = a || jQuery.context || document;
 
 	// Watch for when a jQuery object is passed as the selector
-	if ( a.jquery )
+	//如果a 是jQuery对象，把a和空数组合并，然后返回，这样做的目的是不破坏原来的jQuery对象。
+    //（注：jquery属性是每个jQuery对象都有的，值为jQuery的版本。
+	if (a.jquery)
 		return $( jQuery.merge( a, [] ) );
 
 	// Watch for when a jQuery object is passed at the context
+    //如果c是jQuery对象，调用find函数，去查找
 	if ( c && c.jquery )
 		return $( c ).find(a);
 	
@@ -39,10 +43,15 @@ function jQuery(a,c) {
 	// Handle HTML strings
 	//处理html字符串
 	//以非<开头 当中<> 非>结束
+	//如果a是html代码，$("<div/>")，把html代码转成Dom元素
+    //jQuery.clean 就是把html代码 转换成Dom元素数组
 	var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
 	if ( m ) a = jQuery.clean( [ m[1] ] );
 
 	// Watch for when an array is passed in
+	//如果a是数组或类数组，并且里面装的都是dom元素，把a和空数组合并一下
+	//如果是其他情况，就调用find函数,find函数是处理css表达式的
+    //最后调用get方法，做出jQuery对象返回
 	this.get( a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType ?
 		// Assume that it is an array of DOM Elements
 		jQuery.merge( a, [] ) :
@@ -66,6 +75,12 @@ if ( $ )
 	jQuery._$ = $;
 
 // Map the jQuery namespace to the '$' one
+//$(Function) ready函数
+
+//$(Element) /$([Element]) 可以把Dom元素或者数组直接转换成jQuery对象
+//$(Css Expression,Content),也可以把css表达式来选取Dom元素
+//$(Html) html也可以转换成jQuery对象
+
 var $ = jQuery;
 
 jQuery.fn = jQuery.prototype = {
@@ -94,7 +109,8 @@ jQuery.fn = jQuery.prototype = {
 				// Return just the object
 				this[num];
 	},
-	each: function( fn, args ) {
+each: function (fn, args) {
+        //调用jQuery静态方法each
 		return jQuery.each( this, fn, args );
 	},
 
@@ -330,10 +346,13 @@ jQuery.extend({
 					this.css( n, h );
 			};
 		});
-	
-	},
+
+},
+//对obj中的每一个对象调用fn函数
+//jQuery 对象调用原型方法，原型方法调用静态方法，调用时把this作为参数传进去，静态方法返回时要把this返回。
+
 	each: function( obj, fn, args ) {
-		if ( obj.length == undefined )
+		if ( obj.length == undefined )//如果不是数组
 			for ( var i in obj )
 				fn.apply( obj[i], args || [i, obj[i]] );
 		else
@@ -1098,7 +1117,9 @@ jQuery.init();jQuery.fn.extend({
 		
 		// Bind the function to the two event listeners
 		return this.mouseover(handleHover).mouseout(handleHover);
-	},
+},
+//参数f就是我们传进来的匿名函数，当isReady标志变量为true的时候,
+    //直接执行f函数,否则，把f函数放到readyList数组中去
 	ready: function(f) {
 		// If the DOM is already ready
 		if ( jQuery.isReady )
@@ -1150,6 +1171,7 @@ new function(){
 
 	// Go through all the event names, but make sure that
 	// it is enclosed properly
+    //适当地封闭
 	for ( var i = 0; i < e.length; i++ ) new function(){
 			
 		var o = e[i];
@@ -1190,8 +1212,9 @@ new function(){
 	// If IE is used, use the excellent hack by Matthias Miller
 	// http://www.outofhanwell.com/blog/index.php?title=the_window_onload_problem_revisited
 	} else if ( jQuery.browser.msie ) {
-	
-		// Only works if you document.write() it
+
+    // Only works if you document.write() it
+    //script标签的defer属性，这个defer属性是IE独有的。当它被设为true的时候，表示这段script要等文档加载好了才执行。
 		document.write("<scr" + "ipt id=__ie_init defer=true " + 
 			"src=//:><\/script>");
 	

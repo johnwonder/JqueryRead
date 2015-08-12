@@ -1,15 +1,44 @@
 <html>
 <head>
 <script src="jquery-1.0.js"></script>
+
+<script type="text/javascript">
+
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.sayHello = function () {
+        Person.sayHello(this);
+    }
+
+    Person.sayHello = function (p) {
+        alert(p.name + ",Hello !");
+    }
+
+    var tom = new Person('Tom');
+    tom.sayHello();
+
+</script>
 </head>
 <body>
 <div id="example"></div>
  
 </body>
 
-<script>
-//jQuery(window);// source code line 10 return true
+<script type="text/javascript">
+    //jQuery(window);// source code line 10 return true
+//alert(jQuery("#example").jquery);
+    //jQuery("#example").css("border","1px solid");
 
-jQuery("#example").css("border","1px solid");
+//    if ("") {
+//        alert("1");
+//    }
+//    else {
+//        alert("2");//œ‘ æ2
+    //    }
+    var m = /^[^<]*(<.+>)[^>]*$/.exec("<div/>");
+  var c =   jQuery.clean([ m[1] ]);
+    
 </script>
 </html>
