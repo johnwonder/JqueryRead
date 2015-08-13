@@ -4,20 +4,58 @@
 
 <script type="text/javascript">
 
-    function Person(name) {
-        this.name = name;
-    }
+//    function Person(name) {
+//        this.name = name;
+//    }
 
-    Person.prototype.sayHello = function () {
-        Person.sayHello(this);
-    }
+//    Person.prototype.sayHello = function () {
+//        Person.sayHello(this);
+//    }
 
-    Person.sayHello = function (p) {
-        alert(p.name + ",Hello !");
-    }
+//    Person.sayHello = function (p) {
+//        alert(p.name + ",Hello !");
+//    }
 
-    var tom = new Person('Tom');
-    tom.sayHello();
+//    var tom = new Person('Tom');
+//    tom.sayHello();
+
+</script>
+
+<script type="text/javascript">
+//    window.onload = function () {
+
+//        var table = document.getElementsByTagName('table')[0];
+//        var tbody = document.createElement('tbody'); //IE6
+//        var tr = document.createElement('tr');
+//        var td = document.createElement('td');
+//        var txt = document.createTextNode('haha');
+//        td.appendChild(txt);
+//        tr.appendChild(td);
+//        tbody.appendChild(tr);//IE6
+//        table.appendChild(tr);
+
+//    };
+</script>
+
+<script type="text/javascript">
+//    var obj = new Object();
+//    obj.length =0;
+//    [].push.apply(obj,[1,2,3])
+//    console.log(obj.length);
+//    console.log(obj[0]);
+//    [ ].push.apply(obj, [5, 6, 7]);
+//    console.log(obj.length);
+//    console.log(obj[0]);
+
+    var stack = [];
+    stack.push([1,2,3,5]);
+//    stack.push(1, 2, 3);
+//    stack.push(5, 6, 7);
+
+    console.log(stack.pop());//弹出最后一个
+</script>
+
+<script type="text/javascript">
 
 </script>
 </head>

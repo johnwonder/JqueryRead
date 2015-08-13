@@ -85,17 +85,22 @@ var $ = jQuery;
 
 jQuery.fn = jQuery.prototype = {
 	jquery: "$Rev: 509 $",
-
+    // 返回jQuery对象的大小,jQuery对象是一个类数组对象,有length,可以索引下标，但是没有数组方法.
 	size: function() {
 		return this.length;
 	},
-
+    //get方法很灵活，参数可有可无。不带参数返回一个jQuery对象数组；参数num为数字型,返回第num个元素；
 	get: function( num ) {
 		// Watch for when an array (of elements) is passed in
 		if ( num && num.constructor == Array ) {
 
 			// Use a tricky hack to make the jQuery object
-			// look and feel like an array
+		    // look and feel like an array
+		    //var obj = new Object();
+		    //obj.length =0;
+		    //[].push.apply(obj,[1,2,3])
+		    //console.log(obj.length)
+            //3
 			this.length = 0;
 			[].push.apply( this, num );
 			
@@ -181,9 +186,17 @@ each: function (fn, args) {
 			b.appendChild( this );
 		});
 	},
-	append: function() {
+append: function () {
+    //第一个参数是arguments,可能包含dom元素的数组，或者是html字符串。
+    //第二个参数true 处理tbody情况.因为当前jQuery实例对象是一个table元素,append一个tr元素，
+    //就会有tbody的情况,所以需要处理。像后面的before和after函数就不需要，因为他们是在外部追加元素。
+    //第三个参数1,代表方向,1代表正向,从上到下,-1代表反向,从下到上
+    //第四个参数function,里面调用的appendChild方法来append元素，底层还是要调用w3c dom函数的。
 		return this.domManip(arguments, true, 1, function(a){
-			this.appendChild( a );
+		    this.appendChild(a);
+		    //dom dom元素
+		    //Mainp 就是Mainipulate 
+            //Dom操作
 		});
 	},
 	prepend: function() {
@@ -266,7 +279,9 @@ each: function (fn, args) {
 
 			for ( var i = ( dir < 0 ? a.length - 1 : 0 );
 				i != ( dir < 0 ? dir : a.length ); i += dir ) {
-					fn.apply( obj, [ clone ? a[i].cloneNode(true) : a[i] ] );
+			    fn.apply(obj, [clone ? a[i].cloneNode(true) : a[i]]);
+			    //把一个列表项从一个列表复制到另一个：cloneNode
+			    //jQuery实例对象多个元素的时候，你把args append到第一个元素上了，jQuery实例的第二个元素他怎么办啊？他没有可以append的了？！所以，上来要判断一下size是不是大于
 			}
 		});
 	},
@@ -275,11 +290,11 @@ each: function (fn, args) {
 
 		if ( !fn || fn.constructor != Function ) {
 			if ( !this.stack ) this.stack = [];
-			this.stack.push( this.get() );
+			this.stack.push( this.get() );//get()把当前对象压入堆栈
 			this.get( a );
 		} else {
-			var old = this.get();
-			this.get( a );
+			var old = this.get();//里面调用map function ,返回当前jquery对象
+			this.get( a );//貌似是为了执行fn
 			if ( fn.constructor == Function )
 				return this.each( fn );
 			this.get( old );
@@ -456,7 +471,7 @@ jQuery.extend({
 			if ( a[i].constructor == String ) {
 
 				var table = "";
-	
+	            //indexOf 返回0 !0才是正确的
 				if ( !a[i].indexOf("<thead") || !a[i].indexOf("<tbody") ) {
 					table = "thead";
 					a[i] = "<table>" + a[i] + "</table>";
