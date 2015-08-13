@@ -36,7 +36,7 @@
 
   var ff = $("#form1").find('.class1');//,function(a){ alert(a);}
 
-  alert(ff.get());//返回一个数组，包含find('.class1')找到的4个元素
+  alert(ff.get());
   alert(ff.stack);//返回一个数组，只包含form1
 </script>
 <script>
