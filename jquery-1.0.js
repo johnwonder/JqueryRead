@@ -14,7 +14,7 @@
 //http://www.2cto.com/kf/201111/110402.html
 window.undefined = window.undefined;
 function jQuery(a,c) {
-
+asdad
 	// Shortcut for document ready (because $(document).each() is silly)
 	if ( a && a.constructor == Function && jQuery.fn.ready )
 		return jQuery(document).ready(a);
