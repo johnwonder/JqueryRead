@@ -14,8 +14,9 @@
 //http://www.2cto.com/kf/201111/110402.html
 window.undefined = window.undefined;
 function jQuery(a,c) {
-asdad
-	// Shortcut for document ready (because $(document).each() is silly)
+
+    // Shortcut for document ready (because $(document).each() is silly)
+    //处理 ready函数,$(function(){})
 	if ( a && a.constructor == Function && jQuery.fn.ready )
 		return jQuery(document).ready(a);
 
@@ -23,10 +24,13 @@ asdad
 	a = a || jQuery.context || document;
 
 	// Watch for when a jQuery object is passed as the selector
-	if ( a.jquery )
+	//如果a 是jQuery对象，把a和空数组合并，然后返回，这样做的目的是不破坏原来的jQuery对象。
+    //（注：jquery属性是每个jQuery对象都有的，值为jQuery的版本。
+	if (a.jquery)
 		return $( jQuery.merge( a, [] ) );
 
 	// Watch for when a jQuery object is passed at the context
+    //如果c是jQuery对象，调用find函数，去查找
 	if ( c && c.jquery )
 		return $( c ).find(a);
 	
@@ -39,10 +43,15 @@ asdad
 	// Handle HTML strings
 	//处理html字符串
 	//以非<开头 当中<> 非>结束
+	//如果a是html代码，$("<div/>")，把html代码转成Dom元素
+    //jQuery.clean 就是把html代码 转换成Dom元素数组
 	var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
 	if ( m ) a = jQuery.clean( [ m[1] ] );
 
 	// Watch for when an array is passed in
+	//如果a是数组或类数组，并且里面装的都是dom元素，把a和空数组合并一下
+	//如果是其他情况，就调用find函数,find函数是处理css表达式的
+    //最后调用get方法，做出jQuery对象返回
 	this.get( a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType ?
 		// Assume that it is an array of DOM Elements
 		jQuery.merge( a, [] ) :
@@ -66,21 +75,32 @@ if ( $ )
 	jQuery._$ = $;
 
 // Map the jQuery namespace to the '$' one
+//$(Function) ready函数
+
+//$(Element) /$([Element]) 可以把Dom元素或者数组直接转换成jQuery对象
+//$(Css Expression,Content),也可以把css表达式来选取Dom元素
+//$(Html) html也可以转换成jQuery对象
+
 var $ = jQuery;
 
 jQuery.fn = jQuery.prototype = {
 	jquery: "$Rev: 509 $",
-
+    // 返回jQuery对象的大小,jQuery对象是一个类数组对象,有length,可以索引下标，但是没有数组方法.
 	size: function() {
 		return this.length;
 	},
-
+    //get方法很灵活，参数可有可无。不带参数返回一个jQuery对象数组；参数num为数字型,返回第num个元素；
 	get: function( num ) {
 		// Watch for when an array (of elements) is passed in
 		if ( num && num.constructor == Array ) {
 
 			// Use a tricky hack to make the jQuery object
-			// look and feel like an array
+		    // look and feel like an array
+		    //var obj = new Object();
+		    //obj.length =0;
+		    //[].push.apply(obj,[1,2,3])
+		    //console.log(obj.length)
+            //3
 			this.length = 0;
 			[].push.apply( this, num );
 			
@@ -94,7 +114,8 @@ jQuery.fn = jQuery.prototype = {
 				// Return just the object
 				this[num];
 	},
-	each: function( fn, args ) {
+each: function (fn, args) {
+        //调用jQuery静态方法each
 		return jQuery.each( this, fn, args );
 	},
 
@@ -165,9 +186,17 @@ jQuery.fn = jQuery.prototype = {
 			b.appendChild( this );
 		});
 	},
-	append: function() {
+append: function () {
+    //第一个参数是arguments,可能包含dom元素的数组，或者是html字符串。
+    //第二个参数true 处理tbody情况.因为当前jQuery实例对象是一个table元素,append一个tr元素，
+    //就会有tbody的情况,所以需要处理。像后面的before和after函数就不需要，因为他们是在外部追加元素。
+    //第三个参数1,代表方向,1代表正向,从上到下,-1代表反向,从下到上
+    //第四个参数function,里面调用的appendChild方法来append元素，底层还是要调用w3c dom函数的。
 		return this.domManip(arguments, true, 1, function(a){
-			this.appendChild( a );
+		    this.appendChild(a);
+		    //dom dom元素
+		    //Mainp 就是Mainipulate 
+            //Dom操作
 		});
 	},
 	prepend: function() {
@@ -250,7 +279,9 @@ jQuery.fn = jQuery.prototype = {
 
 			for ( var i = ( dir < 0 ? a.length - 1 : 0 );
 				i != ( dir < 0 ? dir : a.length ); i += dir ) {
-					fn.apply( obj, [ clone ? a[i].cloneNode(true) : a[i] ] );
+			    fn.apply(obj, [clone ? a[i].cloneNode(true) : a[i]]);
+			    //把一个列表项从一个列表复制到另一个：cloneNode
+			    //jQuery实例对象多个元素的时候，你把args append到第一个元素上了，jQuery实例的第二个元素他怎么办啊？他没有可以append的了？！所以，上来要判断一下size是不是大于
 			}
 		});
 	},
@@ -259,11 +290,11 @@ jQuery.fn = jQuery.prototype = {
 
 		if ( !fn || fn.constructor != Function ) {
 			if ( !this.stack ) this.stack = [];
-			this.stack.push( this.get() );
+			this.stack.push( this.get() );//get()把当前对象压入堆栈
 			this.get( a );
 		} else {
-			var old = this.get();
-			this.get( a );
+			var old = this.get();//里面调用map function ,返回当前jquery对象
+			this.get( a );//貌似是为了执行fn
 			if ( fn.constructor == Function )
 				return this.each( fn );
 			this.get( old );
@@ -330,10 +361,13 @@ jQuery.extend({
 					this.css( n, h );
 			};
 		});
-	
-	},
+
+},
+//对obj中的每一个对象调用fn函数
+//jQuery 对象调用原型方法，原型方法调用静态方法，调用时把this作为参数传进去，静态方法返回时要把this返回。
+
 	each: function( obj, fn, args ) {
-		if ( obj.length == undefined )
+		if ( obj.length == undefined )//如果不是数组
 			for ( var i in obj )
 				fn.apply( obj[i], args || [i, obj[i]] );
 		else
@@ -437,7 +471,7 @@ jQuery.extend({
 			if ( a[i].constructor == String ) {
 
 				var table = "";
-	
+	            //indexOf 返回0 !0才是正确的
 				if ( !a[i].indexOf("<thead") || !a[i].indexOf("<tbody") ) {
 					table = "thead";
 					a[i] = "<table>" + a[i] + "</table>";
@@ -1098,7 +1132,9 @@ jQuery.init();jQuery.fn.extend({
 		
 		// Bind the function to the two event listeners
 		return this.mouseover(handleHover).mouseout(handleHover);
-	},
+},
+//参数f就是我们传进来的匿名函数，当isReady标志变量为true的时候,
+    //直接执行f函数,否则，把f函数放到readyList数组中去
 	ready: function(f) {
 		// If the DOM is already ready
 		if ( jQuery.isReady )
@@ -1150,6 +1186,7 @@ new function(){
 
 	// Go through all the event names, but make sure that
 	// it is enclosed properly
+    //适当地封闭
 	for ( var i = 0; i < e.length; i++ ) new function(){
 			
 		var o = e[i];
@@ -1190,8 +1227,9 @@ new function(){
 	// If IE is used, use the excellent hack by Matthias Miller
 	// http://www.outofhanwell.com/blog/index.php?title=the_window_onload_problem_revisited
 	} else if ( jQuery.browser.msie ) {
-	
-		// Only works if you document.write() it
+
+    // Only works if you document.write() it
+    //script标签的defer属性，这个defer属性是IE独有的。当它被设为true的时候，表示这段script要等文档加载好了才执行。
 		document.write("<scr" + "ipt id=__ie_init defer=true " + 
 			"src=//:><\/script>");
 	
