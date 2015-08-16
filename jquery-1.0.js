@@ -149,6 +149,7 @@ each: function (fn, args) {
 			}) :
 			
 			// Look for the case where we're accessing a style value
+			//∂¡»° Ù–‘÷µ
 			jQuery[ type || "attr" ]( this[0], key );
 	},
 

@@ -1,0 +1,38 @@
+<html>
+<head>
+<script src="jquery-1.0.js"></script>
+
+-<!--http://www.cnblogs.com/whitewolf/archive/2013/03/14/2958720.html-->
+<script type="text/javascript">
+String.prototype.capitalize = function(){
+ 
+    return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2,p3,p4){ 
+	//m为匹配的字符串
+	//p1为(^|\s) 匹配的字符串
+	//p2为([a-z])匹配的字符串
+	//p3为匹配的索引
+	//p4为字符串本身
+	return p1+p2.toUpperCase();
+ 
+    } );
+ 
+};
+
+var ss = '--sas'.replace(/-([a-z])/ig,function(z,b){
+
+return b.toUpperCase();}
+
+);
+console.log(ss);
+console.log("i am a boy !".capitalize())
+</script>
+</head>
+<body>
+<div id="example"></div>
+ 
+</body>
+
+<script type="text/javascript">
+
+</script>
+</html>
