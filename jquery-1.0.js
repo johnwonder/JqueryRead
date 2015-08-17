@@ -82,7 +82,7 @@ if ( $ )
 //$(Html) html也可以转换成jQuery对象
 
 var $ = jQuery;
-
+//jquery对象方法
 jQuery.fn = jQuery.prototype = {
 	jquery: "$Rev: 509 $",
     // 返回jQuery对象的大小,jQuery对象是一个类数组对象,有length,可以索引下标，但是没有数组方法.
@@ -175,8 +175,9 @@ each: function (fn, args) {
 		return this.each(function(){
 			// Clone the structure that we're using to wrap
 			var b = a[0].cloneNode(true);
-			
+
 			// Insert it before the element to be wrapped
+            //在前面插入
 			this.parentNode.insertBefore( b, this );
 			
 			// Find he deepest point in the wrap structure
