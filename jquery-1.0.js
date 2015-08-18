@@ -52,7 +52,8 @@ function jQuery(a,c) {
 	//如果a是数组或类数组，并且里面装的都是dom元素，把a和空数组合并一下
 	//如果是其他情况，就调用find函数,find函数是处理css表达式的
     //最后调用get方法，做出jQuery对象返回
-	this.get( a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType ?
+	this.get( a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].
+     ?
 		// Assume that it is an array of DOM Elements
 		jQuery.merge( a, [] ) :
 
@@ -305,7 +306,7 @@ append: function () {
 		return this;
 	}
 };
-
+//这里 生成 jQuery[] 的使用
 jQuery.extend = jQuery.fn.extend = function(obj,prop) {
 	if ( !prop ) { prop = obj; obj = this; }
 	for ( var i in prop ) obj[i] = prop[i];
