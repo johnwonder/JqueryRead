@@ -1,0 +1,16 @@
+var aQuery = function(selector,context){
+
+return new aQuery.prototype.init();
+
+}
+aQuery.prototype ={
+
+init:function(){
+	return this;
+},
+name:function(){
+	return this.age;
+},
+age:20
+
+}
