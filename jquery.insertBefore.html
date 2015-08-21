@@ -1,0 +1,33 @@
+<html>
+<head>
+<script src="jquery-1.0.js"></script>
+
+<script type="text/javascript">
+
+//jQuery.each( jQuery.macros.to, function(i,n){
+			//jQuery.fn[ i ] = function(){
+				//var a = arguments;
+				//return this.each(function(){
+					//for ( var j = 0; j < a.length; j++ )
+						//$(a[j])[n]( this );
+			//	});
+			//};
+	//	});
+
+</script>
+
+
+</head>
+<body>
+<div id="example"></div>
+ <script type="text/javascript">
+ //$("#example").prepend("<b>Prepended text</b>. ");
+
+ var e = document.getElementById("example");
+
+ var b = document.createElement("b");
+ b.innerHTML="Prepended text";
+ e.insertBefore(b,null);
+ </script>
+</body>
+</html>
