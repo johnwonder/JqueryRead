@@ -156,7 +156,9 @@ each: function (fn, args) {
 
 	css: function( key, value ) {
 		return this.attr( key, value, "curCSS" );
-	},
+},
+   //如果节点是元素节点，则 nodeType 属性将返回 1。 
+   //如果节点是属性节点，则 nodeType 属性将返回 2。
 	text: function(e) {
 		e = e || this;
 		var t = "";
