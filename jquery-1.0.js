@@ -54,7 +54,8 @@ function jQuery(a,c) {
     //最后调用get方法，做出jQuery对象返回
 	this.get( a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType
      ?
-		// Assume that it is an array of DOM Elements
+	// Assume that it is an array of DOM Elements
+        //假设是个Dom元素数组 ，那么合并
 		jQuery.merge( a, [] ) :
 
 		// Find the matching elements and save them for later
@@ -328,6 +329,7 @@ jQuery.extend({
 			};
 		});
 		
+        //appendTo 转化为append
 		jQuery.each( jQuery.macros.to, function(i,n){
 			jQuery.fn[ i ] = function(){
 				var a = arguments;
@@ -573,8 +575,9 @@ jQuery.extend({
 		// Make sure that the context is a DOM Element
 		if ( context && context.nodeType == undefined )
 			context = null;
-	
+
 		// Set the correct context (if none is provided)
+        //设置当前上下文为Document
 		context = context || jQuery.context || document;
 	
 		if ( t.constructor != String ) return [t];
