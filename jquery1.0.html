@@ -52,11 +52,13 @@
 //    stack.push(1, 2, 3);
 //    stack.push(5, 6, 7);
 
-    console.log(stack.pop());//�������һ��
+    console.log(stack.pop());//µ¯³ö×îºóÒ»¸ö
 </script>
 
 <script type="text/javascript">
-
+	var reg = /\\./g;// \\代表匹配\ .代表 匹配除“\r\n”之外的任何单个字符。要匹配包括“\r\n”在内的任何字符，请使用像“[\s\S]”的模式
+    var result = reg.exec("\\sn");
+    alert(result);
 </script>
 </head>
 <body>
@@ -73,7 +75,7 @@
 //        alert("1");
 //    }
 //    else {
-//        alert("2");//��ʾ2
+//        alert("2");//ÏÔÊ¾2
     //    }
     var m = /^[^<]*(<.+>)[^>]*$/.exec("<div/>");
   var c =   jQuery.clean([ m[1] ]);
