@@ -230,6 +230,7 @@ append: function () {
 	},
 
 	clone: function(deep) {
+		//把当前克隆的元素压入stack
 		return this.pushStack( jQuery.map( this, function(a){
 			return a.cloneNode( deep != undefined ? deep : true );
 		}), arguments );
