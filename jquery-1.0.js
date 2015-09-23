@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  * jQuery - New Wave Javascript
  *
  * Copyright (c) 2006 John Resig (jquery.com)
@@ -10,13 +10,13 @@
  */
 
 // Global undefined variable
-//window±¾À´ÊÇÃ»ÓĞundefinedÊôĞÔµÄ£¬ËùÒÔwindow.undefinedµÄÖµ¾ÍÊÇundefined£¬°Ñundefined¸³Öµ¸øwindow.undefinedÊôĞÔ£¬undefined¾Í±ä³ÉÈ«¾Ö±äÁ¿ÁË
+//windowæœ¬æ¥æ˜¯æ²¡æœ‰undefinedå±æ€§çš„ï¼Œæ‰€ä»¥window.undefinedçš„å€¼å°±æ˜¯undefinedï¼ŒæŠŠundefinedèµ‹å€¼ç»™window.undefinedå±æ€§ï¼Œundefinedå°±å˜æˆå…¨å±€å˜é‡äº†
 //http://www.2cto.com/kf/201111/110402.html
 window.undefined = window.undefined;
 function jQuery(a,c) {
 
     // Shortcut for document ready (because $(document).each() is silly)
-    //´¦Àí readyº¯Êı,$(function(){})
+    //å¤„ç† readyå‡½æ•°,$(function(){})
 	if ( a && a.constructor == Function && jQuery.fn.ready )
 		return jQuery(document).ready(a);
 
@@ -24,74 +24,74 @@ function jQuery(a,c) {
 	a = a || jQuery.context || document;
 
 	// Watch for when a jQuery object is passed as the selector
-	//Èç¹ûa ÊÇjQuery¶ÔÏó£¬°ÑaºÍ¿ÕÊı×éºÏ²¢£¬È»ºó·µ»Ø£¬ÕâÑù×öµÄÄ¿µÄÊÇ²»ÆÆ»µÔ­À´µÄjQuery¶ÔÏó¡£
-    //£¨×¢£ºjqueryÊôĞÔÊÇÃ¿¸öjQuery¶ÔÏó¶¼ÓĞµÄ£¬ÖµÎªjQueryµÄ°æ±¾¡£
+	//å¦‚æœa æ˜¯jQueryå¯¹è±¡ï¼ŒæŠŠaå’Œç©ºæ•°ç»„åˆå¹¶ï¼Œç„¶åè¿”å›ï¼Œè¿™æ ·åšçš„ç›®çš„æ˜¯ä¸ç ´ååŸæ¥çš„jQueryå¯¹è±¡ã€‚
+    //ï¼ˆæ³¨ï¼šjqueryå±æ€§æ˜¯æ¯ä¸ªjQueryå¯¹è±¡éƒ½æœ‰çš„ï¼Œå€¼ä¸ºjQueryçš„ç‰ˆæœ¬ã€‚
 	if (a.jquery)
 		return $( jQuery.merge( a, [] ) );
 
 	// Watch for when a jQuery object is passed at the context
-    //Èç¹ûcÊÇjQuery¶ÔÏó£¬µ÷ÓÃfindº¯Êı£¬È¥²éÕÒ
+    //å¦‚æœcæ˜¯jQueryå¯¹è±¡ï¼Œè°ƒç”¨findå‡½æ•°ï¼Œå»æŸ¥æ‰¾
 	if ( c && c.jquery )
 		return $( c ).find(a);
 	
 	// If the context is global, return a new object
-	//jquery("#example") µÚÒ»´Î ½øÈë  ·µ»Ø new Jquery(),
-	//½øÈëjQuery.find
+	//jquery("#example") ç¬¬ä¸€æ¬¡ è¿›å…¥  è¿”å› new Jquery(),
+	//è¿›å…¥jQuery.find
 	if ( window == this )
 		return new jQuery(a,c);
 
 	// Handle HTML strings
-	//´¦Àíhtml×Ö·û´®
-	//ÒÔ·Ç<¿ªÍ· µ±ÖĞ<> ·Ç>½áÊø
-	//Èç¹ûaÊÇhtml´úÂë£¬$("<div/>")£¬°Ñhtml´úÂë×ª³ÉDomÔªËØ
-    //jQuery.clean ¾ÍÊÇ°Ñhtml´úÂë ×ª»»³ÉDomÔªËØÊı×é
+	//å¤„ç†htmlå­—ç¬¦ä¸²
+	//ä»¥é<å¼€å¤´ å½“ä¸­<> é>ç»“æŸ
+	//å¦‚æœaæ˜¯htmlä»£ç ï¼Œ$("<div/>")ï¼ŒæŠŠhtmlä»£ç è½¬æˆDomå…ƒç´ 
+    //jQuery.clean å°±æ˜¯æŠŠhtmlä»£ç  è½¬æ¢æˆDomå…ƒç´ æ•°ç»„
 	var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
 	if ( m ) a = jQuery.clean( [ m[1] ] );
 
 	// Watch for when an array is passed in
-	//Èç¹ûaÊÇÊı×é»òÀàÊı×é£¬²¢ÇÒÀïÃæ×°µÄ¶¼ÊÇdomÔªËØ£¬°ÑaºÍ¿ÕÊı×éºÏ²¢Ò»ÏÂ
-	//Èç¹ûÊÇÆäËûÇé¿ö£¬¾Íµ÷ÓÃfindº¯Êı,findº¯ÊıÊÇ´¦Àícss±í´ïÊ½µÄ
-    //×îºóµ÷ÓÃget·½·¨£¬×ö³öjQuery¶ÔÏó·µ»Ø
+	//å¦‚æœaæ˜¯æ•°ç»„æˆ–ç±»æ•°ç»„ï¼Œå¹¶ä¸”é‡Œé¢è£…çš„éƒ½æ˜¯domå…ƒç´ ï¼ŒæŠŠaå’Œç©ºæ•°ç»„åˆå¹¶ä¸€ä¸‹
+	//å¦‚æœæ˜¯å…¶ä»–æƒ…å†µï¼Œå°±è°ƒç”¨findå‡½æ•°,findå‡½æ•°æ˜¯å¤„ç†cssè¡¨è¾¾å¼çš„
+    //æœ€åè°ƒç”¨getæ–¹æ³•ï¼Œåšå‡ºjQueryå¯¹è±¡è¿”å›
 	this.get( a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType
      ?
 	// Assume that it is an array of DOM Elements
-        //¼ÙÉèÊÇ¸öDomÔªËØÊı×é £¬ÄÇÃ´ºÏ²¢
+        //å‡è®¾æ˜¯ä¸ªDomå…ƒç´ æ•°ç»„ ï¼Œé‚£ä¹ˆåˆå¹¶
 		jQuery.merge( a, [] ) :
 
 		// Find the matching elements and save them for later
-		//µ÷ÓÃjQuery ¾²Ì¬·½·¨ Í¨¹ıJquery.extendÀ©Õ¹
+		//è°ƒç”¨jQuery é™æ€æ–¹æ³• é€šè¿‡Jquery.extendæ‰©å±•
 		jQuery.find( a, c ) );
 
   // See if an extra function was provided
-  //²ÎÊıÀïÊÇ·ñÓĞÀ©Õ¹·½·¨Ìá¹©
+  //å‚æ•°é‡Œæ˜¯å¦æœ‰æ‰©å±•æ–¹æ³•æä¾›
 	var fn = arguments[ arguments.length - 1 ];
 	
 	// If so, execute it in context
 	if ( fn && fn.constructor == Function )
-		this.each(fn);//Í¨¹ıjQuery.prototype  Ô­ĞÍÁ´
+		this.each(fn);//é€šè¿‡jQuery.prototype  åŸå‹é“¾
 }
 
 // Map over the $ in case of overwrite
-//Èç¹û$±»ÖØĞ´,ÄÇÃ´Ó³Éäµ½_$ÉÏ
+//å¦‚æœ$è¢«é‡å†™,é‚£ä¹ˆæ˜ å°„åˆ°_$ä¸Š
 if ( $ )
 	jQuery._$ = $;
 
 // Map the jQuery namespace to the '$' one
-//$(Function) readyº¯Êı
+//$(Function) readyå‡½æ•°
 
-//$(Element) /$([Element]) ¿ÉÒÔ°ÑDomÔªËØ»òÕßÊı×éÖ±½Ó×ª»»³ÉjQuery¶ÔÏó
-//$(Css Expression,Content),Ò²¿ÉÒÔ°Ñcss±í´ïÊ½À´Ñ¡È¡DomÔªËØ
-//$(Html) htmlÒ²¿ÉÒÔ×ª»»³ÉjQuery¶ÔÏó
+//$(Element) /$([Element]) å¯ä»¥æŠŠDomå…ƒç´ æˆ–è€…æ•°ç»„ç›´æ¥è½¬æ¢æˆjQueryå¯¹è±¡
+//$(Css Expression,Content),ä¹Ÿå¯ä»¥æŠŠcssè¡¨è¾¾å¼æ¥é€‰å–Domå…ƒç´ 
+//$(Html) htmlä¹Ÿå¯ä»¥è½¬æ¢æˆjQueryå¯¹è±¡
 
 var $ = jQuery;
-//jquery¶ÔÏó·½·¨
+//jqueryå¯¹è±¡æ–¹æ³•
 jQuery.fn = jQuery.prototype = {
 	jquery: "$Rev: 509 $",
-    // ·µ»ØjQuery¶ÔÏóµÄ´óĞ¡,jQuery¶ÔÏóÊÇÒ»¸öÀàÊı×é¶ÔÏó,ÓĞlength,¿ÉÒÔË÷ÒıÏÂ±ê£¬µ«ÊÇÃ»ÓĞÊı×é·½·¨.
+    // è¿”å›jQueryå¯¹è±¡çš„å¤§å°,jQueryå¯¹è±¡æ˜¯ä¸€ä¸ªç±»æ•°ç»„å¯¹è±¡,æœ‰length,å¯ä»¥ç´¢å¼•ä¸‹æ ‡ï¼Œä½†æ˜¯æ²¡æœ‰æ•°ç»„æ–¹æ³•.
 	size: function() {
 		return this.length;
 	},
-    //get·½·¨ºÜÁé»î£¬²ÎÊı¿ÉÓĞ¿ÉÎŞ¡£²»´ø²ÎÊı·µ»ØÒ»¸öjQuery¶ÔÏóÊı×é£»²ÎÊınumÎªÊı×ÖĞÍ,·µ»ØµÚnum¸öÔªËØ£»
+    //getæ–¹æ³•å¾ˆçµæ´»ï¼Œå‚æ•°å¯æœ‰å¯æ— ã€‚ä¸å¸¦å‚æ•°è¿”å›ä¸€ä¸ªjQueryå¯¹è±¡æ•°ç»„ï¼›å‚æ•°numä¸ºæ•°å­—å‹,è¿”å›ç¬¬numä¸ªå…ƒç´ ï¼›
 	get: function( num ) {
 		// Watch for when an array (of elements) is passed in
 		if ( num && num.constructor == Array ) {
@@ -117,7 +117,7 @@ jQuery.fn = jQuery.prototype = {
 				this[num];
 	},
 each: function (fn, args) {
-        //µ÷ÓÃjQuery¾²Ì¬·½·¨each
+        //è°ƒç”¨jQueryé™æ€æ–¹æ³•each
 		return jQuery.each( this, fn, args );
 	},
 
@@ -145,21 +145,22 @@ each: function (fn, args) {
 				// See if we're setting a single key/value style
 				else
 					jQuery.attr(
-						type ? this.style : this,
+						type ? this.style : this,//è¿™è¾¹çš„thiså·²ç»æ˜¯domå¯¹è±¡
 						key, value
 					);
 			}) :
 			
 			// Look for the case where we're accessing a style value
-			//¶ÁÈ¡ÊôĞÔÖµ
+			//è¯»å–å±æ€§å€¼ css ->è°ƒç”¨é™æ€æ–¹æ³•jQuery.curCSS
 			jQuery[ type || "attr" ]( this[0], key );
 	},
 
 	css: function( key, value ) {
 		return this.attr( key, value, "curCSS" );
 },
-   //Èç¹û½ÚµãÊÇÔªËØ½Úµã£¬Ôò nodeType ÊôĞÔ½«·µ»Ø 1¡£ 
-   //Èç¹û½ÚµãÊÇÊôĞÔ½Úµã£¬Ôò nodeType ÊôĞÔ½«·µ»Ø 2¡£
+   //å¦‚æœèŠ‚ç‚¹æ˜¯å…ƒç´ èŠ‚ç‚¹ï¼Œåˆ™ nodeType å±æ€§å°†è¿”å› 1ã€‚ 
+   //å¦‚æœèŠ‚ç‚¹æ˜¯å±æ€§èŠ‚ç‚¹ï¼Œåˆ™ nodeType å±æ€§å°†è¿”å› 2ã€‚
+   //æœ€ç»ˆé€šè¿‡å„ä¸ªèŠ‚ç‚¹çš„nodeValue æ‹¼æ¥è¿”å›
 	text: function(e) {
 		e = e || this;
 		var t = "";
@@ -167,7 +168,7 @@ each: function (fn, args) {
 			var r = e[j].childNodes;
 			for ( var i = 0; i < r.length; i++ )
 				t += r[i].nodeType != 1 ?
-					r[i].nodeValue : jQuery.fn.text([ r[i] ]);
+					r[i].nodeValue : jQuery.fn.text([ r[i] ]);//ç»§ç»­è°ƒç”¨textæ–¹æ³•
 		}
 		return t;
 	},
@@ -181,7 +182,7 @@ each: function (fn, args) {
 			var b = a[0].cloneNode(true);
 
 			// Insert it before the element to be wrapped
-            //ÔÚÇ°Ãæ²åÈë
+            //åœ¨å‰é¢æ’å…¥
 			this.parentNode.insertBefore( b, this );
 			
 			// Find he deepest point in the wrap structure
@@ -193,16 +194,16 @@ each: function (fn, args) {
 		});
 	},
 append: function () {
-    //µÚÒ»¸ö²ÎÊıÊÇarguments,¿ÉÄÜ°üº¬domÔªËØµÄÊı×é£¬»òÕßÊÇhtml×Ö·û´®¡£
-    //µÚ¶ş¸ö²ÎÊıtrue ´¦ÀítbodyÇé¿ö.ÒòÎªµ±Ç°jQueryÊµÀı¶ÔÏóÊÇÒ»¸ötableÔªËØ,appendÒ»¸ötrÔªËØ£¬
-    //¾Í»áÓĞtbodyµÄÇé¿ö,ËùÒÔĞèÒª´¦Àí¡£ÏñºóÃæµÄbeforeºÍafterº¯Êı¾Í²»ĞèÒª£¬ÒòÎªËûÃÇÊÇÔÚÍâ²¿×·¼ÓÔªËØ¡£
-    //µÚÈı¸ö²ÎÊı1,´ú±í·½Ïò,1´ú±íÕıÏò,´ÓÉÏµ½ÏÂ,-1´ú±í·´Ïò,´ÓÏÂµ½ÉÏ
-    //µÚËÄ¸ö²ÎÊıfunction,ÀïÃæµ÷ÓÃµÄappendChild·½·¨À´appendÔªËØ£¬µ×²ã»¹ÊÇÒªµ÷ÓÃw3c domº¯ÊıµÄ¡£
+    //ç¬¬ä¸€ä¸ªå‚æ•°æ˜¯arguments,å¯èƒ½åŒ…å«domå…ƒç´ çš„æ•°ç»„ï¼Œæˆ–è€…æ˜¯htmlå­—ç¬¦ä¸²ã€‚
+    //ç¬¬äºŒä¸ªå‚æ•°true å¤„ç†tbodyæƒ…å†µ.å› ä¸ºå½“å‰jQueryå®ä¾‹å¯¹è±¡æ˜¯ä¸€ä¸ªtableå…ƒç´ ,appendä¸€ä¸ªtrå…ƒç´ ï¼Œ
+    //å°±ä¼šæœ‰tbodyçš„æƒ…å†µ,æ‰€ä»¥éœ€è¦å¤„ç†ã€‚åƒåé¢çš„beforeå’Œafterå‡½æ•°å°±ä¸éœ€è¦ï¼Œå› ä¸ºä»–ä»¬æ˜¯åœ¨å¤–éƒ¨è¿½åŠ å…ƒç´ ã€‚
+    //ç¬¬ä¸‰ä¸ªå‚æ•°1,ä»£è¡¨æ–¹å‘,1ä»£è¡¨æ­£å‘,ä»ä¸Šåˆ°ä¸‹,-1ä»£è¡¨åå‘,ä»ä¸‹åˆ°ä¸Š
+    //ç¬¬å››ä¸ªå‚æ•°function,é‡Œé¢è°ƒç”¨çš„appendChildæ–¹æ³•æ¥appendå…ƒç´ ï¼Œåº•å±‚è¿˜æ˜¯è¦è°ƒç”¨w3c domå‡½æ•°çš„ã€‚
 		return this.domManip(arguments, true, 1, function(a){
 		    this.appendChild(a);
-		    //dom domÔªËØ
-		    //Mainp ¾ÍÊÇMainipulate 
-            //Dom²Ù×÷
+		    //dom domå…ƒç´ 
+		    //Mainp å°±æ˜¯Mainipulate 
+            //Domæ“ä½œ
 		});
 	},
 	prepend: function() {
@@ -230,7 +231,7 @@ append: function () {
 	},
 
 	clone: function(deep) {
-		//°Ñµ±Ç°¿ËÂ¡µÄÔªËØÑ¹Èëstack
+		//æŠŠå½“å‰å…‹éš†çš„å…ƒç´ å‹å…¥stack
 		return this.pushStack( jQuery.map( this, function(a){
 			return a.cloneNode( deep != undefined ? deep : true );
 		}), arguments );
@@ -287,8 +288,8 @@ append: function () {
 			for ( var i = ( dir < 0 ? a.length - 1 : 0 );
 				i != ( dir < 0 ? dir : a.length ); i += dir ) {
 			    fn.apply(obj, [clone ? a[i].cloneNode(true) : a[i]]);
-			    //°ÑÒ»¸öÁĞ±íÏî´ÓÒ»¸öÁĞ±í¸´ÖÆµ½ÁíÒ»¸ö£ºcloneNode
-			    //jQueryÊµÀı¶ÔÏó¶à¸öÔªËØµÄÊ±ºò£¬Äã°Ñargs appendµ½µÚÒ»¸öÔªËØÉÏÁË£¬jQueryÊµÀıµÄµÚ¶ş¸öÔªËØËûÔõÃ´°ì°¡£¿ËûÃ»ÓĞ¿ÉÒÔappendµÄÁË£¿£¡ËùÒÔ£¬ÉÏÀ´ÒªÅĞ¶ÏÒ»ÏÂsizeÊÇ²»ÊÇ´óÓÚ
+			    //æŠŠä¸€ä¸ªåˆ—è¡¨é¡¹ä»ä¸€ä¸ªåˆ—è¡¨å¤åˆ¶åˆ°å¦ä¸€ä¸ªï¼šcloneNode
+			    //jQueryå®ä¾‹å¯¹è±¡å¤šä¸ªå…ƒç´ çš„æ—¶å€™ï¼Œä½ æŠŠargs appendåˆ°ç¬¬ä¸€ä¸ªå…ƒç´ ä¸Šäº†ï¼ŒjQueryå®ä¾‹çš„ç¬¬äºŒä¸ªå…ƒç´ ä»–æ€ä¹ˆåŠå•Šï¼Ÿä»–æ²¡æœ‰å¯ä»¥appendçš„äº†ï¼Ÿï¼æ‰€ä»¥ï¼Œä¸Šæ¥è¦åˆ¤æ–­ä¸€ä¸‹sizeæ˜¯ä¸æ˜¯å¤§äº
 			}
 		});
 	},
@@ -297,11 +298,11 @@ append: function () {
 
 		if ( !fn || fn.constructor != Function ) {
 			if ( !this.stack ) this.stack = [];
-			this.stack.push( this.get() );//get()°Ñµ±Ç°¶ÔÏóÑ¹Èë¶ÑÕ»
+			this.stack.push( this.get() );//get()æŠŠå½“å‰å¯¹è±¡å‹å…¥å †æ ˆ
 			this.get( a );
 		} else {
-			var old = this.get();//ÀïÃæµ÷ÓÃmap function ,·µ»Øµ±Ç°jquery¶ÔÏó
-			this.get( a );//Ã²ËÆÊÇÎªÁËÖ´ĞĞfn
+			var old = this.get();//é‡Œé¢è°ƒç”¨map function ,è¿”å›å½“å‰jqueryå¯¹è±¡
+			this.get( a );//è²Œä¼¼æ˜¯ä¸ºäº†æ‰§è¡Œfn
 			if ( fn.constructor == Function )
 				return this.each( fn );
 			this.get( old );
@@ -310,7 +311,7 @@ append: function () {
 		return this;
 	}
 };
-//ÕâÀï Éú³É jQuery[] µÄÊ¹ÓÃ
+//è¿™é‡Œ ç”Ÿæˆ jQuery[] çš„ä½¿ç”¨
 jQuery.extend = jQuery.fn.extend = function(obj,prop) {
 	if ( !prop ) { prop = obj; obj = this; }
 	for ( var i in prop ) obj[i] = prop[i];
@@ -330,7 +331,7 @@ jQuery.extend({
 			};
 		});
 		
-        //appendTo ×ª»¯Îªappend
+        //appendTo è½¬åŒ–ä¸ºappend
 		jQuery.each( jQuery.macros.to, function(i,n){
 			jQuery.fn[ i ] = function(){
 				var a = arguments;
@@ -371,11 +372,11 @@ jQuery.extend({
 		});
 
 },
-//¶ÔobjÖĞµÄÃ¿Ò»¸ö¶ÔÏóµ÷ÓÃfnº¯Êı
-//jQuery ¶ÔÏóµ÷ÓÃÔ­ĞÍ·½·¨£¬Ô­ĞÍ·½·¨µ÷ÓÃ¾²Ì¬·½·¨£¬µ÷ÓÃÊ±°Ñthis×÷Îª²ÎÊı´«½øÈ¥£¬¾²Ì¬·½·¨·µ»ØÊ±Òª°Ñthis·µ»Ø¡£
+//å¯¹objä¸­çš„æ¯ä¸€ä¸ªå¯¹è±¡è°ƒç”¨fnå‡½æ•°
+//jQuery å¯¹è±¡è°ƒç”¨åŸå‹æ–¹æ³•ï¼ŒåŸå‹æ–¹æ³•è°ƒç”¨é™æ€æ–¹æ³•ï¼Œè°ƒç”¨æ—¶æŠŠthisä½œä¸ºå‚æ•°ä¼ è¿›å»ï¼Œé™æ€æ–¹æ³•è¿”å›æ—¶è¦æŠŠthisè¿”å›ã€‚
 
 	each: function( obj, fn, args ) {
-		if ( obj.length == undefined )//Èç¹û²»ÊÇÊı×é
+		if ( obj.length == undefined )//å¦‚æœä¸æ˜¯æ•°ç»„
 			for ( var i in obj )
 				fn.apply( obj[i], args || [i, obj[i]] );
 		else
@@ -420,7 +421,7 @@ jQuery.extend({
 			}
 	
 			jQuery.swap( e, old, function() {
-				if (jQuery.css(e,"display") != "none") {
+				if (jQuery.css(e,"display") != "none") {//è¿™è¾¹ç›´æ¥è°ƒç”¨jQuery.curCSSæ–¹æ³•
 					oHeight = e.offsetHeight;
 					oWidth = e.offsetWidth;
 				} else {
@@ -450,20 +451,24 @@ jQuery.extend({
 			ret = elem.style[prop];
 
 		} else if (elem.currentStyle) {
-
+			//æ¯”å¦‚-width æ›¿æ¢ä¸ºWidth
 			var newProp = prop.replace(/\-(\w)/g,function(m,c){return c.toUpperCase()}); 
 			ret = elem.currentStyle[prop] || elem.currentStyle[newProp];
 
 		} else if (document.defaultView && document.defaultView.getComputedStyle) {
 
 			prop = prop.replace(/([A-Z])/g,"-$1").toLowerCase();
+			//http://www.zhangxinxu.com/wordpress/2012/05/getcomputedstyle-js-getpropertyvalue-currentstyle/
+			//Gecko 2.0 (Firefox 4 / Thunderbird 3.3 / SeaMonkey 2.1) ä¹‹å‰ï¼Œç¬¬äºŒä¸ªå‚æ•°â€œä¼ªç±»â€æ˜¯å¿…éœ€çš„ï¼ˆå¦‚æœä¸æ˜¯ä¼ªç±»ï¼Œè®¾ç½®ä¸ºnullï¼‰ï¼Œä¸è¿‡ç°åœ¨å˜›ï¼Œä¸æ˜¯å¿…éœ€å‚æ•°äº†
 			var cur = document.defaultView.getComputedStyle(elem, null);
 
 			if ( cur )
-				ret = cur.getPropertyValue(prop);
+				ret = cur.getPropertyValue(prop);//getPropertyValueæ–¹æ³•å¯ä»¥è·å–CSSæ ·å¼ç”³æ˜å¯¹è±¡ä¸Šçš„å±æ€§å€¼
 			else if ( prop == 'display' )
 				ret = 'none';
 			else
+				//å…ˆæŠŠelemçš„style display  èµ‹ç»™olddisplay å†è°ƒç”¨function æœ€åæŠŠolddisplayèµ‹ç»™display
+				//line 404
 				jQuery.swap(elem, { display: 'block' }, function() {
 					ret = document.defaultView.getComputedStyle(this,null).getPropertyValue(prop);
 				});
@@ -479,7 +484,7 @@ jQuery.extend({
 			if ( a[i].constructor == String ) {
 
 				var table = "";
-	            //indexOf ·µ»Ø0 !0²ÅÊÇÕıÈ·µÄ
+	            //indexOf è¿”å›0 !0æ‰æ˜¯æ­£ç¡®çš„
 				if ( !a[i].indexOf("<thead") || !a[i].indexOf("<tbody") ) {
 					table = "thead";
 					a[i] = "<table>" + a[i] + "</table>";
@@ -578,7 +583,7 @@ jQuery.extend({
 			context = null;
 
 		// Set the correct context (if none is provided)
-        //ÉèÖÃµ±Ç°ÉÏÏÂÎÄÎªDocument
+        //è®¾ç½®å½“å‰ä¸Šä¸‹æ–‡ä¸ºDocument
 		context = context || jQuery.context || document;
 	
 		if ( t.constructor != String ) return [t];
@@ -624,7 +629,7 @@ jQuery.extend({
 					r = ret = [context];
 					t = " " + t.substr(1,t.length);
 				} else {
-					var re2 = /^([#.]?)([a-z0-9\\*_-]*)/i;//# »ò .¿ªÍ· 
+					var re2 = /^([#.]?)([a-z0-9\\*_-]*)/i;//# æˆ– .å¼€å¤´ 
 					var m = re2.exec(t);
 		
 					if ( m[1] == "#" ) {
@@ -1142,8 +1147,8 @@ jQuery.init();jQuery.fn.extend({
 		// Bind the function to the two event listeners
 		return this.mouseover(handleHover).mouseout(handleHover);
 },
-//²ÎÊıf¾ÍÊÇÎÒÃÇ´«½øÀ´µÄÄäÃûº¯Êı£¬µ±isReady±êÖ¾±äÁ¿ÎªtrueµÄÊ±ºò,
-    //Ö±½ÓÖ´ĞĞfº¯Êı,·ñÔò£¬°Ñfº¯Êı·Åµ½readyListÊı×éÖĞÈ¥
+//å‚æ•°få°±æ˜¯æˆ‘ä»¬ä¼ è¿›æ¥çš„åŒ¿åå‡½æ•°ï¼Œå½“isReadyæ ‡å¿—å˜é‡ä¸ºtrueçš„æ—¶å€™,
+    //ç›´æ¥æ‰§è¡Œfå‡½æ•°,å¦åˆ™ï¼ŒæŠŠfå‡½æ•°æ”¾åˆ°readyListæ•°ç»„ä¸­å»
 	ready: function(f) {
 		// If the DOM is already ready
 		if ( jQuery.isReady )
@@ -1195,7 +1200,7 @@ new function(){
 
 	// Go through all the event names, but make sure that
 	// it is enclosed properly
-    //ÊÊµ±µØ·â±Õ
+    //é€‚å½“åœ°å°é—­
 	for ( var i = 0; i < e.length; i++ ) new function(){
 			
 		var o = e[i];
@@ -1238,7 +1243,7 @@ new function(){
 	} else if ( jQuery.browser.msie ) {
 
     // Only works if you document.write() it
-    //script±êÇ©µÄdeferÊôĞÔ£¬Õâ¸ödeferÊôĞÔÊÇIE¶ÀÓĞµÄ¡£µ±Ëü±»ÉèÎªtrueµÄÊ±ºò£¬±íÊ¾Õâ¶ÎscriptÒªµÈÎÄµµ¼ÓÔØºÃÁË²ÅÖ´ĞĞ¡£
+    //scriptæ ‡ç­¾çš„deferå±æ€§ï¼Œè¿™ä¸ªdeferå±æ€§æ˜¯IEç‹¬æœ‰çš„ã€‚å½“å®ƒè¢«è®¾ä¸ºtrueçš„æ—¶å€™ï¼Œè¡¨ç¤ºè¿™æ®µscriptè¦ç­‰æ–‡æ¡£åŠ è½½å¥½äº†æ‰æ‰§è¡Œã€‚
 		document.write("<scr" + "ipt id=__ie_init defer=true " + 
 			"src=//:><\/script>");
 	
