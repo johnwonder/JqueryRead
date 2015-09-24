@@ -800,6 +800,7 @@ jQuery.extend({
 			next: elems[elems.n + 1]
 		});
 	},
+	//合并两个数组
 	merge: function(first, second) {
 		var result = [];
 		
@@ -847,12 +848,12 @@ jQuery.extend({
 		if ( fn.constructor == String )
 			fn = new Function("a","return " + fn);
 		
-		var result = [];
+		var result = [];//初始化一个空数组
 		
 		// Go through the array, translating each of the items to their
 		// new value (or values).
 		for ( var i = 0; i < elems.length; i++ ) {
-			var val = fn(elems[i],i);
+			var val = fn(elems[i],i);//调用参数fn 函数 返回fn中的新结果
 
 			if ( val !== null && val != undefined ) {
 				if ( val.constructor != Array ) val = [val];

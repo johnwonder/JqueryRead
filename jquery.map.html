@@ -2,7 +2,7 @@
 <html>
 <head>
   <style>p { color:red; }</style>
-  <script type="text/javascript" src="jquery-1.0.js"></script>
+  <script type="text/javascript" src="jquery-1.2.6.js"></script>
 </head>
 
 <body>
@@ -30,20 +30,27 @@
 <p><b>Values: </b></p>
 
 <script>
-  var result = $('.class1').get();//·µ»Ø±»Ñ¡ÖĞµÄÔªËØÊı×é
+  var result = $('.class1').get();//è¿”å›è¢«é€‰ä¸­çš„å…ƒç´ æ•°ç»„
 
-   var result = $('.class1').get([1,2,3,4]);//4¸öÔªËØµÄÊı×é ,1,2,3,4
+   var result = $('.class1').get([1,2,3,4]);//4ä¸ªå…ƒç´ çš„æ•°ç»„ ,1,2,3,4
 
   var ff = $("#form1").find('.class1');//,function(a){ alert(a);}
 
-  alert(ff.get());//·µ»ØÒ»¸öÊı×é£¬°üº¬find('.class1')ÕÒµ½µÄ4¸öÔªËØ
-  alert(ff.stack);//·µ»ØÒ»¸öÊı×é£¬Ö»°üº¬form1
+  alert(ff.get());//è¿”å›ä¸€ä¸ªæ•°ç»„ï¼ŒåŒ…å«find('.class1')æ‰¾åˆ°çš„4ä¸ªå…ƒç´ 
+  alert(ff.stack);//è¿”å›ä¸€ä¸ªæ•°ç»„ï¼ŒåªåŒ…å«form1
 </script>
 <script>
+  //1.0è¿˜æ²¡æœ‰ç»™jQueryå¯¹è±¡åŠ ä¸Šmapæ–¹æ³•
+  $('.class1').map(function(a,b){
+      //alert(b);
+      //aæ˜¯ç´¢å¼•
+      //bæ˜¯domå¯¹è±¡
+      return b.id;
 
+  });
   $.map($('.class1'),function(a) {
     return a.id;
-  });//·µ»ØÔªËØidÊı×é
+  });//è¿”å›å…ƒç´ idæ•°ç»„
 </script>
 
 </body>
