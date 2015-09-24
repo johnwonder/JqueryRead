@@ -610,7 +610,7 @@ jQuery.extend({
 			t = jQuery.trim(t).replace( /^\/\//i, "" );
 			
 			var foundToken = false;
-			
+			//这里调用token 正则匹配 然后在map里传入function的字符串。。
 			for ( var i = 0; i < jQuery.token.length; i += 2 ) {
 				var re = new RegExp("^(" + jQuery.token[i] + ")");
 				var m = re.exec(t);
