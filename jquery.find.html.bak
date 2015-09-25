@@ -11,7 +11,7 @@
 <script type="text/javascript">
  
  //var reg =/^([a-z*_-]*)/i;// 有两个 [] 匹配一个 ()匹配一个
- var reg =/^([a-z*_-][a-z0-9_-]*)/i; //有三个匹配 [] [] ()
+ var reg =/^([a-z*_-][a-z0-9_-]*)/i;
  //([:.#]*)  [a-z0-9_-]
  var m= reg.exec("div#example");
  var ex =$("div#example");

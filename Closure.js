@@ -19,14 +19,17 @@ function createCounter(initial){
 	return {
 		increment :increment,
 		get: get,
-		getInitial:getInitial
+		getInitial:getInitial,
+		counter,//返回的时候是100
+		initial :initial
 	};
 
 }
 
 var myCounter = createCounter(100);
 
-console.log(myCounter.get());
 myCounter.increment(5);
-console.log(myCounter.get());
+console.log(myCounter.get());//get的时候已经是105了
+console.log(myCounter.counter);//保存的是返回myCounter的时候的值
+console.log(myCounter.initial);
 console.log(myCounter.getInitial());
