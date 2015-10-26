@@ -222,7 +222,7 @@ append: function () {
 		});
 	},
 	end: function() {
-		return this.get( this.stack.pop() );
+		return this.get( this.stack.pop() );//stack 保存了元素数组,get把当前元素数组 push 1.0还没有prevObject
 	},
 	find: function(t) {
 		return this.pushStack( jQuery.map( this, function(a){
