@@ -1,0 +1,31 @@
+<html>
+<head>
+<script src="jquery-1.0.js"></script>
+
+<script type="text/javascript">
+
+
+</script>
+
+
+</head>
+<body>
+<div id="grandparent"> 
+<ul>
+  <li><strong>list</strong> item 1 - one strong tag</li>
+  <li><strong>list</strong> item <strong>2</strong>
+   - two <span>strong tags</span></li>
+  <li>list item 3</li>
+  <li>list item 4</li>
+  <li>list item 5</li>
+  <li>list item 6</li>
+</ul>
+</div> 
+<!--要1.2.6-->
+ <script type="text/javascript">
+$('li').filter(function(index) {
+  return $("strong",index).length == 1;//1.0要改成$("strong",index)才行
+}).css('background-color', 'red');
+ </script>
+</body>
+</html>
