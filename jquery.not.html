@@ -1,0 +1,38 @@
+<html>
+<head>
+<script src="jquery-1.0.js"></script>
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+
+</script>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<ul>
+  <li>list item 1</li>
+  <li>list item 2</li>
+  <li id="notli">list item 3</li>
+  <li>list item 4</li>
+  <li>list item 5</li>
+</ul>
+ 
+</body>
+
+<script type="text/javascript">
+ $('li').not('#notli').css('background-color', 'red');
+    //因为not参数是#notli  字符串 那么not 内部先调用filter
+    //filter内部 先吧jQuery.grep 赋给g
+    //然后再通过正则对#notli解析匹配，通过eval构造参数f传给jquery.grep
+
+    //如果not参数是dom元素的话 那么 会直接 执行函数function(a){ return a != t; }
+</script>
+</html>
