@@ -1697,6 +1697,7 @@ jQuery.extend({
 					jQuery( r ).not( m[3] );
 
 			// We can get a big speed boost by filtering by class here
+			//根据className 会提高速度
 			else if ( m[1] == "." )
 				r = jQuery.classFilter(r, m[2], not);
 

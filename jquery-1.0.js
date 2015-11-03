@@ -1,4 +1,4 @@
-﻿/*
+/*
  * jQuery - New Wave Javascript
  *
  * Copyright (c) 2006 John Resig (jquery.com)
@@ -236,7 +236,9 @@ append: function () {
 			return a.cloneNode( deep != undefined ? deep : true );
 		}), arguments );
 	},
-
+	//筛选出元素
+	//1.2.6 如果是Function的话直接grep
+	//如果不是Function那么调用multiFilter
 	filter: function(t) {
 		return this.pushStack(
 			t.constructor == Array &&
@@ -255,6 +257,7 @@ append: function () {
 			jQuery.filter(t,this).r, arguments );
 	},
 
+	//如果给定一个表示 DOM 元素集合的 jQuery 对象，.not() 方法会用匹配元素的子集构造一个新的 jQuery 对象。所应用的选择器会检测每个元素；不匹配该选择器的元素会被包含在结果中
 	not: function(t) {
 		return this.pushStack( t.constructor == String ?
 			jQuery.filter(t,this,false).r :
@@ -299,6 +302,7 @@ append: function () {
 		if ( !fn || fn.constructor != Function ) {
 			if ( !this.stack ) this.stack = [];
 			this.stack.push( this.get() );//get()把当前对象压入堆栈
+			//jQuery.map( this, function(a){ return a } ) :
 			this.get( a );
 		} else {
 			var old = this.get();//里面调用map function ,返回当前jquery对象
@@ -733,8 +737,8 @@ jQuery.extend({
 
 				if ( m ) {
 					// Re-organize the match
-					if ( p[i][1] )
-						m = ["", m[1], m[3], m[2], m[4]];
+					if ( p[i][1] )//Match: [@value='test'], [@foo]  p[i][1] 为1
+ 						m = ["", m[1], m[3], m[2], m[4]];
 
 					// Remove what we just matched
 					t = t.replace( re, "" );
