@@ -717,12 +717,15 @@ jQuery.extend({
 	
 	filter: function(t,r,not) {
 		// Figure out if we're doing regular, or inverse, filtering
+		//not 为undefined的时候 not!==false返回true 
+		//所以g = jQuery.grep
 		var g = not !== false ? jQuery.grep :
 			function(a,f) {return jQuery.grep(a,f,true);};
 		
+		//not(.example) 符合正则
 		while ( t && /^[a-z[({<*:.#]/i.test(t) ) {
 
-			var p = jQuery.parse;
+			var p = jQuery.parse;//parse数组
 
 			for ( var i = 0; i < p.length; i++ ) {
 				var re = new RegExp( "^" + p[i][0]
