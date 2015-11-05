@@ -746,14 +746,14 @@ jQuery.extend({
 					// Remove what we just matched
 					t = t.replace( re, "" );
 
-					break;
+					break;//这里就退出循环了
 				}
 			}
 	
 			// :not() is a special case that can be optomized by
 			// keeping it out of the expression list
 			if ( m[1] == ":" && m[2] == "not" )
-				r = jQuery.filter(m[3],r,false).r;
+				r = jQuery.filter(m[3],r,false).r;//递归下 到里面grep就是为包装grep的函数了
 			
 			// Otherwise, find the expression to execute
 			else {
@@ -775,6 +775,7 @@ jQuery.extend({
 		// and the modified expression string (t)
 		return { r: r, t: t };
 	},
+	//去除空格
 	trim: function(t){
 		return t.replace(/^\s+|\s+$/g, "");
 	},
