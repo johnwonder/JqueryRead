@@ -263,7 +263,7 @@ append: function () {
 			jQuery.filter(t,this,false).r :
 			jQuery.grep(this,function(a){ return a != t; }), arguments );
 	},
-
+	//add() 方法将元素添加到匹配元素的集合中。
 	add: function(t) {
 		return this.pushStack( jQuery.merge( this, t.constructor == String ?
 			jQuery.find(t) : t.constructor == Array ? t : [t] ), arguments );
