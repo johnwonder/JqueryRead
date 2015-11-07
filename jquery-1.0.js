@@ -779,6 +779,7 @@ jQuery.extend({
 	trim: function(t){
 		return t.replace(/^\s+|\s+$/g, "");
 	},
+	//1.2.6放到jquery.each函数中 再通过jquery.fn 包装
 	parents: function( elem ){
 		var matched = [];
 		var cur = elem.parentNode;
