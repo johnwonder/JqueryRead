@@ -1339,7 +1339,7 @@ jQuery.fn.extend({
 		return this.queue(function(){
 		
 			this.curAnim = prop;
-			
+			//原来是调用了jQuery.fx
 			for ( var p in prop ) {
 				var e = new jQuery.fx( this, jQuery.speed(speed,callback), p );
 				if ( prop[p].constructor == Number )
