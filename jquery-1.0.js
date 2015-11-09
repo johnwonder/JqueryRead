@@ -1168,7 +1168,7 @@ jQuery.init();jQuery.fn.extend({
 		// Otherwise, remember the function for later
 		else {
 			// Add the function to the wait list
-			jQuery.readyList.push( f );
+			jQuery.readyList.push( f );//放入readyList数组队列
 		}
 	
 		return this;
@@ -1270,6 +1270,8 @@ new function(){
 	// If Safari  is used
 	} else if ( jQuery.browser.safari ) {
 		// Continually check to see if the document.readyState is valid
+		//用个定时器轮询 1.2.6改为setTimeout( arguments.callee, 0 );
+		//1.4.3改为document.addEventListener
 		jQuery.safariTimer = setInterval(function(){
 			// loaded and complete are both valid states
 			if ( document.readyState == "loaded" || 
@@ -1323,11 +1325,11 @@ jQuery.fn.extend({
 			$(this).animate({height: state}, speed, callback);
 		});
 	},
-
+	//淡入
 	fadeIn: function(speed,callback){
 		return this.animate({opacity: "show"}, speed, callback);
 	},
-
+	//淡出
 	fadeOut: function(speed,callback){
 		return this.animate({opacity: "hide"}, speed, callback);
 	},
