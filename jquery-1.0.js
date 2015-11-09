@@ -1347,7 +1347,7 @@ jQuery.fn.extend({
 				if ( prop[p].constructor == Number )
 					e.custom( e.cur(), prop[p] );
 				else
-					e[ prop[p] ]( prop );
+					e[ prop[p] ]( prop );//fadein调用了 opacity show
 			}
 			
 		});
@@ -1467,13 +1467,13 @@ jQuery.extend({
 		z.a = function(){
 			if ( options.step )
 				options.step.apply( elem, [ z.now ] );
-
+			//由step里调用
 			if ( prop == "opacity" ) {
 				if (z.now == 1) z.now = 0.9999;
 				if (window.ActiveXObject)
 					y.filter = "alpha(opacity=" + z.now*100 + ")";
 				else
-					y.opacity = z.now;
+					y.opacity = z.now;//
 
 			// My hate for IE will never die
 			} else if ( parseInt(z.now) )
