@@ -1452,12 +1452,13 @@ jQuery.extend({
 	
 		// The users options
 		z.o = {
-			duration: options.duration || 400,
+			duration: options.duration || 400,//默认400
 			complete: options.complete,
 			step: options.step
 		};
 	
 		// The element
+		//保存元素到对象中
 		z.el = elem;
 	
 		// The styles
@@ -1498,7 +1499,7 @@ jQuery.extend({
 			z.startTime = (new Date()).getTime();
 			z.now = from;
 			z.a();
-	
+			//定时触发timer
 			z.timer = setInterval(function(){
 				z.step(from, to);
 			}, 13);
@@ -1514,6 +1515,7 @@ jQuery.extend({
 			z.custom( 0, z.el.orig[prop] );
 
 			// Stupid IE, look what you made me do
+			//这句话吊
 			if ( prop != "opacity" )
 				y[prop] = "1px";
 		};
@@ -1639,6 +1641,9 @@ jQuery.fn.load = function( url, params, callback, ifModified ) {
 			self.html(res.responseText).each( callback, [res.responseText, status] );
 			
 			// Execute all the scripts inside of the newly-injected HTML
+			//执行所有内嵌在新html中的脚本
+			//要么src
+			//要么执行里面的脚本 通过eval
 			$("script", self).each(function(){
 				if ( this.src )
 					$.getScript( this.src );
