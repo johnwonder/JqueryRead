@@ -942,6 +942,7 @@ jQuery.extend({
 			data = data || [];
 	
 			// Handle a global trigger
+			//全局的触发 ，不管元素
 			if ( !element ) {
 				var g = this.global[type];
 				if ( g )
@@ -1099,6 +1100,7 @@ jQuery.macros = {
 			while ( this.firstChild )
 				this.removeChild( this.firstChild );
 		},
+		//bind通过jQuery.event添加
 		bind: function( type, fn ) {
 			if ( fn.constructor == String )
 				fn = new Function("e", ( !fn.indexOf(".") ? "$(this)" : "return " ) + fn);
@@ -1109,7 +1111,7 @@ jQuery.macros = {
 			jQuery.event.remove( this, type, fn );
 		},
 		trigger: function( type, data ) {
-			jQuery.event.trigger( type, data, this );
+			jQuery.event.trigger( type, data, this );//这里就带元素了
 		}
 	}
 };
