@@ -345,7 +345,7 @@ jQuery.extend({
 				});
 			};
 		});
-		
+		//哦  在这边把jQuery.macros.each 比如click 加入了fn 
 		jQuery.each( jQuery.macros.each, function(i,n){
 			jQuery.fn[ i ] = function() {
 				return this.each( n, arguments );
@@ -866,7 +866,7 @@ jQuery.extend({
 
 			if ( val !== null && val != undefined ) {
 				if ( val.constructor != Array ) val = [val];
-				result = jQuery.merge( result, val );
+				result = jQuery.merge( result, val );//合并
 			}
 		}
 
@@ -1209,7 +1209,7 @@ new function(){
 	var e = ("blur,focus,load,resize,scroll,unload,click,dblclick," +
 		"mousedown,mouseup,mousemove,mouseover,mouseout,change,reset,select," + 
 		"submit,keydown,keypress,keyup,error").split(",");
-
+	//比如$("#element").click(function(){});其实执行的就是bind
 	// Go through all the event names, but make sure that
 	// it is enclosed properly
     //适当地封闭
