@@ -1,0 +1,37 @@
+<html>
+<head>
+<script src="jquery-1.4.3.js"></script>
+<script type="text/javascript" src="Closure.js"></script>
+<script type="text/javascript">
+
+  
+
+</script>
+
+<script type="text/javascript">
+ 
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+	 
+</script>
+</head>
+<body>
+<div id="example" style="position:relative">
+    
+    <div id="block1" style="position:absolute;left:100px;border:1px solid red;width:100px;height:100px;"></div>
+
+    <div id="block2" style="position:absolute;left:100px;top:150px;border:1px solid green;width:100px;height:100px;"></div>
+</div>
+ 
+</body>
+
+<script type="text/javascript">
+//$("#block1").css("border-width","5px")
+   $("#block1").animate({left:"+=100"},2000,function(){ $("#block1").animate({left:"+=100"}); }).animate({left:"+=200"},2000);
+</script>
+</html>

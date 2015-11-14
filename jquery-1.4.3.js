@@ -1342,7 +1342,7 @@ jQuery.extend({
 			if ( type === "fx" ) {
 				queue.unshift("inprogress");
 			}
-
+			//
 			fn.call(elem, function() {
 				jQuery.dequeue(elem, type);
 			});
