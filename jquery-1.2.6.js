@@ -3130,7 +3130,7 @@ jQuery.fn.dequeue = function(type){
 	return this.each(function(){
 		var q = queue(this, type);
 
-		q.shift();
+		q.shift();//1.2.6有bug ，第一个函数不执行。
 
 		if ( q.length )
 			q[0].call( this );
