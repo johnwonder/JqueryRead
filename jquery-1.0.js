@@ -401,7 +401,7 @@ jQuery.extend({
 		},
 		has: function(e,a) {
 			if ( e.className != undefined )
-				e = e.className;
+				e = e.className;//直接把e.className给e
 			return new RegExp("(^|\\s)" + a + "(\\s|$)").test(e);
 		}
 	},
@@ -423,7 +423,9 @@ jQuery.extend({
 				old["padding" + d[i]] = 0;
 				old["border" + d[i] + "Width"] = 0;
 			}
-	
+			//先把e在old中的属性置换为old的属性
+			//然后执行function
+			//最后在置换回来。
 			jQuery.swap( e, old, function() {
 				if (jQuery.css(e,"display") != "none") {//这边直接调用jQuery.curCSS方法
 					oHeight = e.offsetHeight;
@@ -436,7 +438,7 @@ jQuery.extend({
 					oHeight = e.clientHeight;
 					oWidth = e.clientWidth;
 					
-					e.parentNode.removeChild(e);
+					e.parentNode.removeChild(e);//从bod'y移除
 				}
 			});
 	
