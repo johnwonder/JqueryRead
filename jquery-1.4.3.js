@@ -1344,6 +1344,7 @@ jQuery.extend({
 			}
 			//
 			fn.call(elem, function() {
+				alert('heelo');
 				jQuery.dequeue(elem, type);
 			});
 		}
@@ -6289,6 +6290,7 @@ jQuery.extend({
 		opt.old = opt.complete;
 		opt.complete = function() {
 			if ( opt.queue !== false ) {
+				//一个动画结束时执行了dequeue
 				jQuery(this).dequeue();
 			}
 			if ( jQuery.isFunction( opt.old ) ) {

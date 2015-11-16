@@ -23,16 +23,16 @@
 <body>
 <div id="example" style="position:relative">
     
-    <div id="block1" style="position:absolute;left:100px;border:1px solid red;width:100px;height:100px;"></div>
+    <div id="block1" style="position:absolute;left:100px;border:1px solid red;width:100px;height:100px;">第一个元素</div>
 
-    <div id="block2" style="position:absolute;left:100px;top:150px;border:1px solid green;width:100px;height:100px;"></div>
+    <div id="block2" style="position:absolute;left:100px;top:150px;border:1px solid green;width:100px;height:100px;">第二个元素  </div>
 </div>
  
 </body>
 
 <script type="text/javascript">
     var FUNC=[
-   function() {$("#block1").animate({left:"+=100"},aniCB);},
+   //function() {$("#block1").animate({left:"+=100"},aniCB);},
    function() {$("#block2").animate({left:"+=100"},aniCB);},
   function() {$("#block1").animate({left:"+=100"},aniCB);},
   function() {$("#block2").animate({left:"+=100"},aniCB);},

@@ -3155,6 +3155,7 @@ jQuery.extend({
 		opt.old = opt.complete;
 		opt.complete = function(){
 			if ( opt.queue !== false )
+					//一个动画结束时执行了dequeue
 				jQuery(this).dequeue();
 			if ( jQuery.isFunction( opt.old ) )
 				opt.old.call( this );
@@ -3275,7 +3276,7 @@ jQuery.fx.prototype = {
 	// Each step of an animation
 	step: function(gotoEnd){
 		var t = now();
-
+		console.log(gotoEnd);
 		if ( gotoEnd || t > this.options.duration + this.startTime ) {
 			this.now = this.end;
 			this.pos = this.state = 1;
