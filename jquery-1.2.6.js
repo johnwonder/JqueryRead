@@ -3150,6 +3150,8 @@ jQuery.extend({
 		opt.duration = (opt.duration && opt.duration.constructor == Number ?
 			opt.duration :
 			jQuery.fx.speeds[opt.duration]) || jQuery.fx.speeds.def;
+			//哦  在这里传入opt.duration 
+			//可以传入字符串slow  fast
 
 		// Queueing
 		opt.old = opt.complete;
@@ -3282,6 +3284,9 @@ jQuery.fx.prototype = {
 			this.pos = this.state = 1;
 			this.update();
 
+			//设置属性为true 
+			//prop通过Jquery.each传入 
+			//在line 3031
 			this.options.curAnim[ this.prop ] = true;
 
 			var done = true;
