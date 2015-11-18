@@ -798,7 +798,7 @@ jQuery.extend({
 		for ( var i = 0; i < siblings.length; i++ ) {
 			if ( not === true && siblings[i] == elem ) continue;
 
-			if ( siblings[i].nodeType == 1 )
+			if ( siblings[i].nodeType == 1 )//表明是元素
 				elems.push( siblings[i] );
 			if ( siblings[i] == elem )
 				elems.n = elems.length - 1;
@@ -806,6 +806,7 @@ jQuery.extend({
 
 		return jQuery.extend( elems, {
 			last: elems.n == elems.length - 1,
+			//0%2等于0
 			cur: pos == "even" && elems.n % 2 == 0 || pos == "odd" && elems.n % 2 || elems[pos] == elem,
 			prev: elems[elems.n - 1],
 			next: elems[elems.n + 1]
