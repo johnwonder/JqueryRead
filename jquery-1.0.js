@@ -895,6 +895,7 @@ jQuery.extend({
 				handler.guid = this.guid++;
 				
 			// Init the element's event structure
+			//初始化元素事件结构
 			if (!element.events)
 				element.events = {};
 			
@@ -920,7 +921,7 @@ jQuery.extend({
 			// Remember the function in a global list (for triggering)
 			if (!this.global[type])
 				this.global[type] = [];
-			this.global[type].push( element );
+			this.global[type].push( element );//放到global对象的type数组中
 		},
 		
 		guid: 1,
@@ -928,9 +929,9 @@ jQuery.extend({
 		
 		// Detach an event or set of events from an element
 		remove: function(element, type, handler) {
-			if (element.events)
+			if (element.events)//如果元素有events
 				if (type && element.events[type])
-					if ( handler )
+					if ( handler )//删除
 						delete element.events[type][handler.guid];
 					else
 						for ( var i in element.events[type] )
@@ -950,7 +951,7 @@ jQuery.extend({
 				var g = this.global[type];
 				if ( g )
 					for ( var i = 0; i < g.length; i++ )
-						this.trigger( type, data, g[i] );
+						this.trigger( type, data, g[i] );//g[i]代表元素
 	
 			// Handle triggering a single element
 			} else if ( element["on" + type] ) {
@@ -972,7 +973,7 @@ jQuery.extend({
 		
 			var returnValue = true;
 
-			var c = this.events[event.type];
+			var c = this.events[event.type];//这里获得事件
 		
 			for ( var j in c ) {
 				if ( c[j].apply( this, [event] ) === false ) {
