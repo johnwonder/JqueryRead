@@ -1223,6 +1223,7 @@ new function(){
 		
 		// Handle event binding
 		jQuery.fn[o] = function(f){
+			//如果没参数f绑定 那么就执行事件。。
 			return f ? this.bind(o, f) : this.trigger(o);
 		};
 		
