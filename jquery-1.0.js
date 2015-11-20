@@ -1074,7 +1074,7 @@ jQuery.macros = {
 		},
 		show: function(){
 			this.style.display = this.oldblock ? this.oldblock : "";
-			if ( jQuery.css(this,"display") == "none" )
+			if ( jQuery.css(this,"display") == "none" )//这里有点奇怪
 				this.style.display = "block";
 		},
 		hide: function(){
@@ -1239,6 +1239,7 @@ new function(){
 				// Add the event
 				jQuery.event.add( this, o, function(e){
 					// If this function has already been executed, stop
+					//只能执行一次
 					if ( count++ ) return;
 				
 					// And execute the bound function

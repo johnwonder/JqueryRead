@@ -526,8 +526,10 @@ jQuery.fn = jQuery.prototype = {
 };
 
 // Give the init function the jQuery prototype for later instantiation
+//关键就是在这边
 jQuery.fn.init.prototype = jQuery.fn;
 
+//执行脚本
 function evalScript( i, elem ) {
 	if ( elem.src )
 		jQuery.ajax({
@@ -641,6 +643,7 @@ jQuery.extend({
 			else
 				script.appendChild( document.createTextNode( data ) );
 
+			//可恶的IE6
 			// Use insertBefore instead of appendChild  to circumvent an IE6 bug.
 			// This arises when a base node is used (#2709).
 			head.insertBefore( script, head.firstChild );
