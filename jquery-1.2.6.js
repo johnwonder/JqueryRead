@@ -544,7 +544,7 @@ function evalScript( i, elem ) {
 	if ( elem.parentNode )
 		elem.parentNode.removeChild( elem );
 }
-
+//返回当前日期
 function now(){
 	return +new Date;
 }
@@ -682,7 +682,7 @@ jQuery.extend({
 			jQuery.cache[ id ][ name ] :
 			id;
 	},
-
+	//移除缓存
 	removeData: function( elem, name ) {
 		elem = elem == window ?
 			windowData :

@@ -609,6 +609,7 @@ jQuery.extend({
 	},
 
 	// args is for internal usage only
+	//跟1.2.6比多了判断isObj
 	each: function( object, callback, args ) {
 		var name, i = 0,
 			length = object.length,
