@@ -113,6 +113,7 @@ jQuery.fn = jQuery.prototype = {
 		var ret = jQuery( elems );
 
 		// Add the old object onto the stack (as a reference)
+		//把当前实例放到ret 的preObject属性中。
 		ret.prevObject = this;
 
 		// Return the newly-formed element set
@@ -141,7 +142,7 @@ jQuery.fn = jQuery.prototype = {
 	// Determine the position of an element within
 	// the matched set of elements
 	index: function( elem ) {
-		var ret = -1;
+		var ret = -1;// 貌似没用到
 
 		// Locate the position of the desired element
 		return jQuery.inArray(
@@ -164,6 +165,7 @@ jQuery.fn = jQuery.prototype = {
 			}
 
 		// Check to see if we're setting style values
+		//检查是否是设置style.
 		return this.each(function(i){
 			// Set all the styles
 			for ( name in options )
