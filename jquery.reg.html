@@ -80,5 +80,10 @@
  
     var jsonr = "\"[s]\"".replace(/"[^"\\\n\r]*"/g,"ss");
     console.log(jsonr);//输出ss
+
+    var name = '2015-11-26T20:36:46.723';//T20:36:46.723 //(\d{2}):(\d{2}):(\d{2})
+
+    var uw=name.replace(/(\d{4})-(\d{2})-(\d{2})T(\S{8})\.\d{1,3}/g,'$1-$2-$3 $4');
+    console.log(uw);//输出2015-11-26 20:36:46
 </script>
 </html>
