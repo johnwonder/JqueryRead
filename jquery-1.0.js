@@ -1799,7 +1799,8 @@ jQuery.extend({
 				// The request was completed
 				jQuery.event.trigger( "ajaxComplete" );
 				
-				// Handle the global AJAX counter
+				// Handle the global AJAX counter 
+				//处理全局计数器
 				if ( ! --jQuery.active )
 					jQuery.event.trigger( "ajaxStop" );
 	
@@ -1862,6 +1863,7 @@ jQuery.extend({
 	
 	// Get the data out of an XMLHttpRequest.
 	// Return parsed XML if content-type header is "xml" and type is "xml" or omitted,
+	//返回解析过的xml 如果header是xml 而且类型是xml或者忽略
 	// otherwise return plain text.
 	httpData: function(r,type) {
 		var ct = r.getResponseHeader("content-type");
