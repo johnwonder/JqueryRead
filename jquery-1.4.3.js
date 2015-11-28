@@ -506,6 +506,7 @@ jQuery.extend({
 	},
 
 	// A crude way of determining if an object is a window
+	//简陋的方式检测对象是否是window
 	isWindow: function( obj ) {
 		return obj && typeof obj === "object" && "setInterval" in obj;
 	},
@@ -518,6 +519,7 @@ jQuery.extend({
 		return obj == null ?
 			String( obj ) :
 			class2type[ toString.call(obj) ] || "object";
+			//line 835 一些类型的数组
 	},
 
 	isPlainObject: function( obj ) {
