@@ -784,6 +784,7 @@ jQuery.extend({
 
 	// Mutifunctional method to get and set values to a collection
 	// The value/s can be optionally by executed if its a function
+	//http://www.cnblogs.com/hhstuhacker/p/jquery-access-source-advance.html?utm_source=tuicool&utm_medium=referral
 	access: function( elems, key, value, exec, fn, pass ) {
 		var length = elems.length;
 	
@@ -800,6 +801,7 @@ jQuery.extend({
 			// Optionally, function values get executed if exec is true
 			exec = !pass && exec && jQuery.isFunction(value);
 		
+			//直接通过fn设置属性
 			for ( var i = 0; i < length; i++ ) {
 				fn( elems[i], key, exec ? value.call( elems[i], i, fn( elems[i], key ) ) : value, pass );
 			}
@@ -1225,6 +1227,7 @@ jQuery.extend({
 	},
 
 	// A method for determining if a DOM node can handle the data expando
+	//主要判断flash
 	acceptData: function( elem ) {
 		if ( elem.nodeName ) {
 			var match = jQuery.noData[ elem.nodeName.toLowerCase() ];
