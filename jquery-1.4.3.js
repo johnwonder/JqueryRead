@@ -5034,6 +5034,8 @@ jQuery.fn.css = function( name, value ) {
 jQuery.extend({
 	// Add in style property hooks for overriding the default
 	// behavior of getting and setting a style property
+	//http://www.jq-school.com/jquery/jquery%20api%201.10/jQuery.cssHooks.html
+	//之后，您就可以在支持该属性的浏览器中使用 DOM (camel 式) 样式的写法或使用 CSS (带连字符号) 样式的写法来设置边框的半径了：
 	cssHooks: {
 		opacity: {
 			get: function( elem, computed ) {
@@ -5079,6 +5081,7 @@ jQuery.extend({
 		name = jQuery.cssProps[ origName ] || origName;
 
 		// Check if we're setting a value
+		//检测是否是设置属性
 		if ( value !== undefined ) {
 			// Make sure that NaN and null values aren't set. See: #7116
 			if ( typeof value === "number" && isNaN( value ) || value == null ) {
@@ -5086,10 +5089,12 @@ jQuery.extend({
 			}
 
 			// If a number was passed in, add 'px' to the (except for certain CSS properties)
+			//排除只需要数字的样式
 			if ( typeof value === "number" && !jQuery.cssNumber[ origName ] ) {
 				value += "px";
 			}
 
+			//用hooke方法
 			// If a hook was provided, use that value, otherwise just set the specified value
 			if ( !hooks || !("set" in hooks) || (value = hooks.set( elem, value )) !== undefined ) {
 				// Wrapped to prevent IE from throwing errors when 'invalid' values are provided
