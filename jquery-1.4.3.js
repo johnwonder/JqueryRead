@@ -953,6 +953,7 @@ return (window.jQuery = window.$ = jQuery);
 		// Make sure that element opacity exists
 		// (IE uses filter instead)
 		// Use a regex to work around a WebKit issue. See #5145
+		//用正则来绕过Webkit的问题
 		opacity: /^0.55$/.test( a.style.opacity ),
 
 		// Verify style float existence
