@@ -778,6 +778,7 @@ jQuery.extend({
 		return { r: r, t: t };
 	},
 	//去除空格
+	//jquery.1.4.3有判断IE的通过\xA0正则判断
 	trim: function(t){
 		return t.replace(/^\s+|\s+$/g, "");
 	},
@@ -1863,7 +1864,7 @@ jQuery.extend({
 	
 	// Get the data out of an XMLHttpRequest.
 	// Return parsed XML if content-type header is "xml" and type is "xml" or omitted,
-	//返回解析过的xml 如果header是xml 而且类型是xml或者忽略
+	//返回解析过的xml 如果header是xml 而且类型是xml或者忽略，那就返回解析过的xml
 	// otherwise return plain text.
 	httpData: function(r,type) {
 		var ct = r.getResponseHeader("content-type");
@@ -1878,6 +1879,7 @@ jQuery.extend({
 	
 	// Serialize an array of form elements or a set of
 	// key/values into a query string
+	//序列化参数
 	param: function(a) {
 		var s = [];
 		

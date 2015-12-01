@@ -649,7 +649,8 @@ jQuery.extend({
 		return object;
 	},
 
-	// Use native String.trim function wherever possible
+	// Use native String.trim function wherever possible\
+	//如果有原生的trim方法就用原生的
 	trim: trim ?
 		function( text ) {
 			return text == null ?
@@ -858,6 +859,7 @@ if ( indexOf ) {
 
 // Verify that \s matches non-breaking spaces
 // (IE fails on this test)
+//jquery1.0没判断IE
 if ( !rwhite.test( "\xA0" ) ) {
 	trimLeft = /^[\s\xA0]+/;
 	trimRight = /[\s\xA0]+$/;
@@ -873,7 +875,7 @@ if ( document.addEventListener ) {
 		jQuery.ready();
 	};
 
-} else if ( document.attachEvent ) {
+} else if ( document.attachEvent ) {//IE 用 attachEvent
 	DOMContentLoaded = function() {
 		// Make sure body exists, at least, in case IE gets a little overzealous (ticket #5443).
 		if ( document.readyState === "complete" ) {
