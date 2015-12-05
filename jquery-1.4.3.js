@@ -886,6 +886,7 @@ if ( document.addEventListener ) {
 }
 
 // The DOM ready check for Internet Explorer
+//IE 检测Dom是否加载完成
 function doScrollCheck() {
 	if ( jQuery.isReady ) {
 		return;
@@ -934,14 +935,17 @@ return (window.jQuery = window.$ = jQuery);
 
 	jQuery.support = {
 		// IE strips leading whitespace when .innerHTML is used
+		//文本节点
 		leadingWhitespace: div.firstChild.nodeType === 3,
 
 		// Make sure that tbody elements aren't automatically inserted
 		// IE will insert them into empty tables
+		//IE tboby自动插入
 		tbody: !div.getElementsByTagName("tbody").length,
 
 		// Make sure that link elements get serialized correctly by innerHTML
 		// This requires a wrapper element in IE
+		// IE需要包装好的元素
 		htmlSerialize: !!div.getElementsByTagName("link").length,
 
 		// Get the style information from getAttribute
