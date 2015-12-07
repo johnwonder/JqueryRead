@@ -1819,6 +1819,7 @@ jQuery.event = {
 		}
 
 		// Init the element's event structure
+		//line 1139
 		var elemData = jQuery.data( elem );
 
 		// If no elemData is found then we must be trying to bind to one of the
@@ -1847,7 +1848,7 @@ jQuery.event = {
 				elemData[ eventKey ] = elemData = function(){};
 			}
 
-			elemData.events = events = {};
+			elemData.events = events = {};//放到缓存中
 		}
 
 		if ( !eventHandle ) {
@@ -1892,6 +1893,7 @@ jQuery.event = {
 			}
 
 			// Get the current list of functions bound to this event
+			//关键是这里 handlers其实是events[type]
 			var handlers = events[ type ],
 				special = jQuery.event.special[ type ] || {};
 
@@ -1925,6 +1927,7 @@ jQuery.event = {
 			handlers.push( handleObj );
 
 			// Keep track of which events have been used, for global triggering
+			//保持跟踪，为了全局触发
 			jQuery.event.global[ type ] = true;
 		}
 
