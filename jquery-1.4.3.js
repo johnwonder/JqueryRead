@@ -1129,6 +1129,7 @@ jQuery.extend({
 
 	// The following elements throw uncatchable exceptions if you
 	// attempt to add expando properties to them.
+	//尝试放入expando属性会出错
 	noData: {
 		"embed": true,
 		// Ban all objects except for Flash (which handle expandos)
