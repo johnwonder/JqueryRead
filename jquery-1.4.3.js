@@ -1158,6 +1158,7 @@ jQuery.extend({
 			cache = elem;
 
 		// Compute a unique ID for the element
+		//为一个元素计算一个Id
 		} else if ( !id ) {
 			elem[ jQuery.expando ] = id = ++jQuery.uuid;
 		}
@@ -1180,7 +1181,7 @@ jQuery.extend({
 
 		// Prevent overriding the named cache with undefined values
 		if ( data !== undefined ) {
-			thisCache[ name ] = data;
+			thisCache[ name ] = data;//放入数据
 		}
 
 		return typeof name === "string" ? thisCache[ name ] : thisCache;
