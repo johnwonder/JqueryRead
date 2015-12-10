@@ -392,6 +392,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 jQuery.extend({
 	noConflict: function( deep ) {
+		//把$去掉，留给其他框架用
 		window.$ = _$;
 
 		if ( deep ) {
