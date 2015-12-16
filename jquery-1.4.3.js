@@ -392,6 +392,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 jQuery.extend({
 	noConflict: function( deep ) {
+		//把$去掉，留给其他框架用
 		window.$ = _$;
 
 		if ( deep ) {
@@ -1129,6 +1130,7 @@ jQuery.extend({
 
 	// The following elements throw uncatchable exceptions if you
 	// attempt to add expando properties to them.
+	//尝试放入expando属性会出错
 	noData: {
 		"embed": true,
 		// Ban all objects except for Flash (which handle expandos)
@@ -1158,6 +1160,7 @@ jQuery.extend({
 			cache = elem;
 
 		// Compute a unique ID for the element
+		//为一个元素计算一个Id
 		} else if ( !id ) {
 			elem[ jQuery.expando ] = id = ++jQuery.uuid;
 		}
@@ -1180,7 +1183,7 @@ jQuery.extend({
 
 		// Prevent overriding the named cache with undefined values
 		if ( data !== undefined ) {
-			thisCache[ name ] = data;
+			thisCache[ name ] = data;//放入数据
 		}
 
 		return typeof name === "string" ? thisCache[ name ] : thisCache;
