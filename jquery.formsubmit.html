@@ -1,6 +1,6 @@
 <html>
 <head>
-<script src="jquery-1.0.js"></script>
+<script src="jquery-1.5.1.js"></script>
 <script type="text/javascript" src="Closure.js"></script>
 <script type="text/javascript">
 
@@ -58,7 +58,7 @@
 <script type="text/javascript">
 	var reg = /\\./g;// \\代表匹配\ .代表 匹配除“\r\n”之外的任何单个字符。要匹配包括“\r\n”在内的任何字符，请使用像“[\s\S]”的模式
     var result = reg.exec("\\sn");
-    alert(result);
+    //alert(result);
 </script>
 </head>
 <body>
@@ -87,13 +87,28 @@
 
 //$("#btnSubmit").click(function(){
 
-    //貌似只要给表单绑定事件，那么提交表单就会触发
-    $("#curdForm").bind("submt.var",function(){
+$.fn.extend({
+    ///将form转换为具有状态显示的ajax表单
+    ///服务器必须返回Yuanmai.VehicleService.UI.Models.FeedbackModel
+    viduForm :function(){
 
+            alert("start1");//直接执行
+            function _viduForm(event){
 
-        alert("提交");
+            event.preventDefault();
+                alert("提交");
+            return false;
+    
+        //貌似只要给表单绑定事件，那么提交表单就会触发
+        
+        }
+        $(this).bind("submit.sd",_viduForm);
 
-    });
+    }
+});
+    
+
+  $("#curdForm").viduForm();
 //});
 
 $("#example").css("border","1px solid black");
