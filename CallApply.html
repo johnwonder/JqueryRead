@@ -1,0 +1,43 @@
+<html>
+<head>
+<script src="jquery-1.0.js"></script>
+<script type="text/javascript" src="Closure.js"></script>
+<script type="text/javascript">
+function consoleLog(args){
+    console.log(arguments);//传的是数组，打印出数组字符串
+}
+function log(){
+    var args = Array.prototype.slice.call(arguments);
+    args.unshift('(app)');
+    console.log.apply(console,args);
+    console.log.apply(console,['aa','bb']);
+    consoleLog.call(console,args,'1');//本来是个数组，又封装了数组
+    consoleLog.apply(console,args,'1');//忽略了1
+}
+
+log("hello world");
+
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<div id="example"></div>
+ 
+</body>
+
+<script type="text/javascript">
+
+    
+</script>
+</html>

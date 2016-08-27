@@ -113,6 +113,7 @@ jQuery.fn = jQuery.prototype = {
 		var ret = jQuery( elems );
 
 		// Add the old object onto the stack (as a reference)
+		//把当前实例放到ret 的preObject属性中。
 		ret.prevObject = this;
 
 		// Return the newly-formed element set
@@ -141,7 +142,7 @@ jQuery.fn = jQuery.prototype = {
 	// Determine the position of an element within
 	// the matched set of elements
 	index: function( elem ) {
-		var ret = -1;
+		var ret = -1;// 貌似没用到
 
 		// Locate the position of the desired element
 		return jQuery.inArray(
@@ -164,6 +165,7 @@ jQuery.fn = jQuery.prototype = {
 			}
 
 		// Check to see if we're setting style values
+		//检查是否是设置style.
 		return this.each(function(i){
 			// Set all the styles
 			for ( name in options )
@@ -526,8 +528,10 @@ jQuery.fn = jQuery.prototype = {
 };
 
 // Give the init function the jQuery prototype for later instantiation
+//关键就是在这边
 jQuery.fn.init.prototype = jQuery.fn;
 
+//执行脚本
 function evalScript( i, elem ) {
 	if ( elem.src )
 		jQuery.ajax({
@@ -542,7 +546,7 @@ function evalScript( i, elem ) {
 	if ( elem.parentNode )
 		elem.parentNode.removeChild( elem );
 }
-
+//返回当前日期
 function now(){
 	return +new Date;
 }
@@ -641,6 +645,7 @@ jQuery.extend({
 			else
 				script.appendChild( document.createTextNode( data ) );
 
+			//可恶的IE6
 			// Use insertBefore instead of appendChild  to circumvent an IE6 bug.
 			// This arises when a base node is used (#2709).
 			head.insertBefore( script, head.firstChild );
@@ -679,7 +684,7 @@ jQuery.extend({
 			jQuery.cache[ id ][ name ] :
 			id;
 	},
-
+	//移除缓存
 	removeData: function( elem, name ) {
 		elem = elem == window ?
 			windowData :
@@ -1697,6 +1702,7 @@ jQuery.extend({
 					jQuery( r ).not( m[3] );
 
 			// We can get a big speed boost by filtering by class here
+			//根据className 会提高速度
 			else if ( m[1] == "." )
 				r = jQuery.classFilter(r, m[2], not);
 
@@ -3129,7 +3135,7 @@ jQuery.fn.dequeue = function(type){
 	return this.each(function(){
 		var q = queue(this, type);
 
-		q.shift();
+		q.shift();//1.2.6有bug ，第一个函数不执行。
 
 		if ( q.length )
 			q[0].call( this );
@@ -3149,11 +3155,14 @@ jQuery.extend({
 		opt.duration = (opt.duration && opt.duration.constructor == Number ?
 			opt.duration :
 			jQuery.fx.speeds[opt.duration]) || jQuery.fx.speeds.def;
+			//哦  在这里传入opt.duration 
+			//可以传入字符串slow  fast
 
 		// Queueing
 		opt.old = opt.complete;
 		opt.complete = function(){
 			if ( opt.queue !== false )
+					//一个动画结束时执行了dequeue
 				jQuery(this).dequeue();
 			if ( jQuery.isFunction( opt.old ) )
 				opt.old.call( this );
@@ -3274,12 +3283,15 @@ jQuery.fx.prototype = {
 	// Each step of an animation
 	step: function(gotoEnd){
 		var t = now();
-
+		console.log(gotoEnd);
 		if ( gotoEnd || t > this.options.duration + this.startTime ) {
 			this.now = this.end;
 			this.pos = this.state = 1;
 			this.update();
 
+			//设置属性为true 
+			//prop通过Jquery.each传入 
+			//在line 3031
 			this.options.curAnim[ this.prop ] = true;
 
 			var done = true;

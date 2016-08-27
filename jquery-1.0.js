@@ -1,4 +1,4 @@
-﻿/*
+/*
  * jQuery - New Wave Javascript
  *
  * Copyright (c) 2006 John Resig (jquery.com)
@@ -222,7 +222,7 @@ append: function () {
 		});
 	},
 	end: function() {
-		return this.get( this.stack.pop() );
+		return this.get( this.stack.pop() );//stack 保存了元素数组,get把当前元素数组 push 1.0还没有prevObject
 	},
 	find: function(t) {
 		return this.pushStack( jQuery.map( this, function(a){
@@ -236,7 +236,9 @@ append: function () {
 			return a.cloneNode( deep != undefined ? deep : true );
 		}), arguments );
 	},
-
+	//筛选出元素
+	//1.2.6 如果是Function的话直接grep
+	//如果不是Function那么调用multiFilter
 	filter: function(t) {
 		return this.pushStack(
 			t.constructor == Array &&
@@ -255,12 +257,13 @@ append: function () {
 			jQuery.filter(t,this).r, arguments );
 	},
 
+	//如果给定一个表示 DOM 元素集合的 jQuery 对象，.not() 方法会用匹配元素的子集构造一个新的 jQuery 对象。所应用的选择器会检测每个元素；不匹配该选择器的元素会被包含在结果中
 	not: function(t) {
 		return this.pushStack( t.constructor == String ?
 			jQuery.filter(t,this,false).r :
 			jQuery.grep(this,function(a){ return a != t; }), arguments );
 	},
-
+	//add() 方法将元素添加到匹配元素的集合中。
 	add: function(t) {
 		return this.pushStack( jQuery.merge( this, t.constructor == String ?
 			jQuery.find(t) : t.constructor == Array ? t : [t] ), arguments );
@@ -299,6 +302,7 @@ append: function () {
 		if ( !fn || fn.constructor != Function ) {
 			if ( !this.stack ) this.stack = [];
 			this.stack.push( this.get() );//get()把当前对象压入堆栈
+			//jQuery.map( this, function(a){ return a } ) :
 			this.get( a );
 		} else {
 			var old = this.get();//里面调用map function ,返回当前jquery对象
@@ -341,7 +345,7 @@ jQuery.extend({
 				});
 			};
 		});
-		
+		//哦  在这边把jQuery.macros.each 比如click 加入了fn 
 		jQuery.each( jQuery.macros.each, function(i,n){
 			jQuery.fn[ i ] = function() {
 				return this.each( n, arguments );
@@ -397,7 +401,7 @@ jQuery.extend({
 		},
 		has: function(e,a) {
 			if ( e.className != undefined )
-				e = e.className;
+				e = e.className;//直接把e.className给e
 			return new RegExp("(^|\\s)" + a + "(\\s|$)").test(e);
 		}
 	},
@@ -419,7 +423,9 @@ jQuery.extend({
 				old["padding" + d[i]] = 0;
 				old["border" + d[i] + "Width"] = 0;
 			}
-	
+			//先把e在old中的属性置换为old的属性
+			//然后执行function
+			//最后在置换回来。
 			jQuery.swap( e, old, function() {
 				if (jQuery.css(e,"display") != "none") {//这边直接调用jQuery.curCSS方法
 					oHeight = e.offsetHeight;
@@ -432,7 +438,7 @@ jQuery.extend({
 					oHeight = e.clientHeight;
 					oWidth = e.clientWidth;
 					
-					e.parentNode.removeChild(e);
+					e.parentNode.removeChild(e);//从bod'y移除
 				}
 			});
 	
@@ -716,12 +722,15 @@ jQuery.extend({
 	
 	filter: function(t,r,not) {
 		// Figure out if we're doing regular, or inverse, filtering
+		//not 为undefined的时候 not!==false返回true 
+		//所以g = jQuery.grep
 		var g = not !== false ? jQuery.grep :
 			function(a,f) {return jQuery.grep(a,f,true);};
 		
+		//not(.example) 符合正则
 		while ( t && /^[a-z[({<*:.#]/i.test(t) ) {
 
-			var p = jQuery.parse;
+			var p = jQuery.parse;//parse数组
 
 			for ( var i = 0; i < p.length; i++ ) {
 				var re = new RegExp( "^" + p[i][0]
@@ -736,20 +745,20 @@ jQuery.extend({
 
 				if ( m ) {
 					// Re-organize the match
-					if ( p[i][1] )
-						m = ["", m[1], m[3], m[2], m[4]];
+					if ( p[i][1] )//Match: [@value='test'], [@foo]  p[i][1] 为1
+ 						m = ["", m[1], m[3], m[2], m[4]];
 
 					// Remove what we just matched
 					t = t.replace( re, "" );
 
-					break;
+					break;//这里就退出循环了
 				}
 			}
 	
 			// :not() is a special case that can be optomized by
 			// keeping it out of the expression list
 			if ( m[1] == ":" && m[2] == "not" )
-				r = jQuery.filter(m[3],r,false).r;
+				r = jQuery.filter(m[3],r,false).r;//递归下 到里面grep就是为包装grep的函数了
 			
 			// Otherwise, find the expression to execute
 			else {
@@ -771,9 +780,12 @@ jQuery.extend({
 		// and the modified expression string (t)
 		return { r: r, t: t };
 	},
+	//去除空格
+	//jquery.1.4.3有判断IE的通过\xA0正则判断
 	trim: function(t){
 		return t.replace(/^\s+|\s+$/g, "");
 	},
+	//1.2.6放到jquery.each函数中 再通过jquery.fn 包装
 	parents: function( elem ){
 		var matched = [];
 		var cur = elem.parentNode;
@@ -790,7 +802,7 @@ jQuery.extend({
 		for ( var i = 0; i < siblings.length; i++ ) {
 			if ( not === true && siblings[i] == elem ) continue;
 
-			if ( siblings[i].nodeType == 1 )
+			if ( siblings[i].nodeType == 1 )//表明是元素
 				elems.push( siblings[i] );
 			if ( siblings[i] == elem )
 				elems.n = elems.length - 1;
@@ -798,6 +810,7 @@ jQuery.extend({
 
 		return jQuery.extend( elems, {
 			last: elems.n == elems.length - 1,
+			//0%2等于0
 			cur: pos == "even" && elems.n % 2 == 0 || pos == "odd" && elems.n % 2 || elems[pos] == elem,
 			prev: elems[elems.n - 1],
 			next: elems[elems.n + 1]
@@ -860,7 +873,7 @@ jQuery.extend({
 
 			if ( val !== null && val != undefined ) {
 				if ( val.constructor != Array ) val = [val];
-				result = jQuery.merge( result, val );
+				result = jQuery.merge( result, val );//合并
 			}
 		}
 
@@ -886,6 +899,7 @@ jQuery.extend({
 				handler.guid = this.guid++;
 				
 			// Init the element's event structure
+			//初始化元素事件结构
 			if (!element.events)
 				element.events = {};
 			
@@ -911,7 +925,7 @@ jQuery.extend({
 			// Remember the function in a global list (for triggering)
 			if (!this.global[type])
 				this.global[type] = [];
-			this.global[type].push( element );
+			this.global[type].push( element );//放到global对象的type数组中
 		},
 		
 		guid: 1,
@@ -919,9 +933,9 @@ jQuery.extend({
 		
 		// Detach an event or set of events from an element
 		remove: function(element, type, handler) {
-			if (element.events)
+			if (element.events)//如果元素有events
 				if (type && element.events[type])
-					if ( handler )
+					if ( handler )//删除
 						delete element.events[type][handler.guid];
 					else
 						for ( var i in element.events[type] )
@@ -936,11 +950,12 @@ jQuery.extend({
 			data = data || [];
 	
 			// Handle a global trigger
+			//全局的触发 ，不管元素
 			if ( !element ) {
 				var g = this.global[type];
 				if ( g )
 					for ( var i = 0; i < g.length; i++ )
-						this.trigger( type, data, g[i] );
+						this.trigger( type, data, g[i] );//g[i]代表元素
 	
 			// Handle triggering a single element
 			} else if ( element["on" + type] ) {
@@ -962,7 +977,7 @@ jQuery.extend({
 		
 			var returnValue = true;
 
-			var c = this.events[event.type];
+			var c = this.events[event.type];//这里获得事件
 		
 			for ( var j in c ) {
 				if ( c[j].apply( this, [event] ) === false ) {
@@ -1063,7 +1078,7 @@ jQuery.macros = {
 		},
 		show: function(){
 			this.style.display = this.oldblock ? this.oldblock : "";
-			if ( jQuery.css(this,"display") == "none" )
+			if ( jQuery.css(this,"display") == "none" )//这里有点奇怪
 				this.style.display = "block";
 		},
 		hide: function(){
@@ -1093,6 +1108,7 @@ jQuery.macros = {
 			while ( this.firstChild )
 				this.removeChild( this.firstChild );
 		},
+		//bind通过jQuery.event添加
 		bind: function( type, fn ) {
 			if ( fn.constructor == String )
 				fn = new Function("e", ( !fn.indexOf(".") ? "$(this)" : "return " ) + fn);
@@ -1103,7 +1119,7 @@ jQuery.macros = {
 			jQuery.event.remove( this, type, fn );
 		},
 		trigger: function( type, data ) {
-			jQuery.event.trigger( type, data, this );
+			jQuery.event.trigger( type, data, this );//这里就带元素了
 		}
 	}
 };
@@ -1162,7 +1178,7 @@ jQuery.init();jQuery.fn.extend({
 		// Otherwise, remember the function for later
 		else {
 			// Add the function to the wait list
-			jQuery.readyList.push( f );
+			jQuery.readyList.push( f );//放入readyList数组队列
 		}
 	
 		return this;
@@ -1201,7 +1217,7 @@ new function(){
 	var e = ("blur,focus,load,resize,scroll,unload,click,dblclick," +
 		"mousedown,mouseup,mousemove,mouseover,mouseout,change,reset,select," + 
 		"submit,keydown,keypress,keyup,error").split(",");
-
+	//比如$("#element").click(function(){});其实执行的就是bind
 	// Go through all the event names, but make sure that
 	// it is enclosed properly
     //适当地封闭
@@ -1211,6 +1227,7 @@ new function(){
 		
 		// Handle event binding
 		jQuery.fn[o] = function(f){
+			//如果没参数f绑定 那么就执行事件。。
 			return f ? this.bind(o, f) : this.trigger(o);
 		};
 		
@@ -1227,6 +1244,7 @@ new function(){
 				// Add the event
 				jQuery.event.add( this, o, function(e){
 					// If this function has already been executed, stop
+					//只能执行一次
 					if ( count++ ) return;
 				
 					// And execute the bound function
@@ -1264,6 +1282,8 @@ new function(){
 	// If Safari  is used
 	} else if ( jQuery.browser.safari ) {
 		// Continually check to see if the document.readyState is valid
+		//用个定时器轮询 1.2.6改为setTimeout( arguments.callee, 0 );
+		//1.4.3改为document.addEventListener
 		jQuery.safariTimer = setInterval(function(){
 			// loaded and complete are both valid states
 			if ( document.readyState == "loaded" || 
@@ -1317,11 +1337,11 @@ jQuery.fn.extend({
 			$(this).animate({height: state}, speed, callback);
 		});
 	},
-
+	//淡入
 	fadeIn: function(speed,callback){
 		return this.animate({opacity: "show"}, speed, callback);
 	},
-
+	//淡出
 	fadeOut: function(speed,callback){
 		return this.animate({opacity: "hide"}, speed, callback);
 	},
@@ -1333,13 +1353,13 @@ jQuery.fn.extend({
 		return this.queue(function(){
 		
 			this.curAnim = prop;
-			
+			//原来是调用了jQuery.fx
 			for ( var p in prop ) {
 				var e = new jQuery.fx( this, jQuery.speed(speed,callback), p );
 				if ( prop[p].constructor == Number )
 					e.custom( e.cur(), prop[p] );
 				else
-					e[ prop[p] ]( prop );
+					e[ prop[p] ]( prop );//fadein调用了 opacity show
 			}
 			
 		});
@@ -1444,12 +1464,13 @@ jQuery.extend({
 	
 		// The users options
 		z.o = {
-			duration: options.duration || 400,
+			duration: options.duration || 400,//默认400
 			complete: options.complete,
 			step: options.step
 		};
 	
 		// The element
+		//保存元素到对象中
 		z.el = elem;
 	
 		// The styles
@@ -1459,13 +1480,13 @@ jQuery.extend({
 		z.a = function(){
 			if ( options.step )
 				options.step.apply( elem, [ z.now ] );
-
+			//由step里调用
 			if ( prop == "opacity" ) {
 				if (z.now == 1) z.now = 0.9999;
 				if (window.ActiveXObject)
 					y.filter = "alpha(opacity=" + z.now*100 + ")";
 				else
-					y.opacity = z.now;
+					y.opacity = z.now;//
 
 			// My hate for IE will never die
 			} else if ( parseInt(z.now) )
@@ -1490,7 +1511,7 @@ jQuery.extend({
 			z.startTime = (new Date()).getTime();
 			z.now = from;
 			z.a();
-	
+			//定时触发timer
 			z.timer = setInterval(function(){
 				z.step(from, to);
 			}, 13);
@@ -1506,6 +1527,7 @@ jQuery.extend({
 			z.custom( 0, z.el.orig[prop] );
 
 			// Stupid IE, look what you made me do
+			//这句话吊
 			if ( prop != "opacity" )
 				y[prop] = "1px";
 		};
@@ -1631,6 +1653,9 @@ jQuery.fn.load = function( url, params, callback, ifModified ) {
 			self.html(res.responseText).each( callback, [res.responseText, status] );
 			
 			// Execute all the scripts inside of the newly-injected HTML
+			//执行所有内嵌在新html中的脚本
+			//要么src
+			//要么执行里面的脚本 通过eval
 			$("script", self).each(function(){
 				if ( this.src )
 					$.getScript( this.src );
@@ -1778,7 +1803,8 @@ jQuery.extend({
 				// The request was completed
 				jQuery.event.trigger( "ajaxComplete" );
 				
-				// Handle the global AJAX counter
+				// Handle the global AJAX counter 
+				//处理全局计数器
 				if ( ! --jQuery.active )
 					jQuery.event.trigger( "ajaxStop" );
 	
@@ -1841,6 +1867,7 @@ jQuery.extend({
 	
 	// Get the data out of an XMLHttpRequest.
 	// Return parsed XML if content-type header is "xml" and type is "xml" or omitted,
+	//返回解析过的xml 如果header是xml 而且类型是xml或者忽略，那就返回解析过的xml
 	// otherwise return plain text.
 	httpData: function(r,type) {
 		var ct = r.getResponseHeader("content-type");
@@ -1855,6 +1882,7 @@ jQuery.extend({
 	
 	// Serialize an array of form elements or a set of
 	// key/values into a query string
+	//序列化参数
 	param: function(a) {
 		var s = [];
 		

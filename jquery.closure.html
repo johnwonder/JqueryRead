@@ -1,0 +1,48 @@
+<html>
+<head>
+<script src="jquery-1.0.js"></script>
+<script type="text/javascript" src="Closure.js"></script>
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+ 
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+ 
+</script>
+</head>
+<body>
+<div id="example"></div>
+ 
+</body>
+
+<script type="text/javascript">
+ 
+    function  parent(){
+
+        var parent = this;
+        parent.callChild = child;
+        function child(){
+
+            function _child(){
+
+                alert(parent.age);
+            }
+
+            _child();
+        }
+    }
+
+    var p = new parent();
+    p.age = 90;
+
+    p.callChild();
+</script>
+</html>
