@@ -250,7 +250,7 @@ append: function () {
 
 			t.constructor == Boolean &&
 			( t ? this.get() : [] ) ||
-
+			
 			t.constructor == Function &&
 			jQuery.grep( this, t ) ||
 
@@ -322,6 +322,7 @@ jQuery.extend = jQuery.fn.extend = function(obj,prop) {
 	return obj;
 };
 
+//静态方法生成
 jQuery.extend({
 	init: function(){
 		jQuery.initDone = true;
