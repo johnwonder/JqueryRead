@@ -714,8 +714,8 @@ jQuery.extend({
 		// Match: [div], [div p]
 		[ "(\\[)Q\\]", 0 ],
 
-		// Match: :contains('foo')
-		[ "(:)S\\(Q\\)", 0 ],
+		// Match: :contains('foo')  * 匹配前面的子表达式任意次。例如，zo*能匹配“z”，也能匹配“zo”以及“zoo”。
+		[ "(:)S\\(Q\\)", 0 ],//(:)([a-z*_-][a-z0-9_-]*)\\(*'?\"?([^'\"]*?)'?\"? *\\)
 
 		// Match: :even, :last-chlid
 		[ "([:.#]*)S", 0 ]
@@ -725,6 +725,9 @@ jQuery.extend({
 		// Figure out if we're doing regular, or inverse, filtering
 		//not 为undefined的时候 not!==false返回true 
 		//所以g = jQuery.grep
+		//grep静态函数第三个参数为true的话就返回不满足条件的新的元素
+		//t为:not(.example)的时候就会递归调用
+		//最终调用的是grep函数
 		var g = not !== false ? jQuery.grep :
 			function(a,f) {return jQuery.grep(a,f,true);};
 		
@@ -744,25 +747,36 @@ jQuery.extend({
 
 				var m = re.exec( t );
 
+				//:not(.example)递归调用到这
+				//满足.example的就是[ "([:.#]*)S", 0 ]
 				if ( m ) {
 					// Re-organize the match
 					if ( p[i][1] )//Match: [@value='test'], [@foo]  p[i][1] 为1
  						m = ["", m[1], m[3], m[2], m[4]];
 
 					// Remove what we just matched
-					t = t.replace( re, "" );
-
+					t = t.replace( re, "" );//一般t就为空了,所以最后就跳出while循环
+					//.example的话 t就为空了
 					break;//这里就退出循环了
 				}
 			}
 	
 			// :not() is a special case that can be optomized by
 			// keeping it out of the expression list
+			//:not(.example)
+			//m[0] = :not(.example)
+			//m[1] = :
+			//m[2] = not
+			//m[3] = .example
 			if ( m[1] == ":" && m[2] == "not" )
 				r = jQuery.filter(m[3],r,false).r;//递归下 到里面grep就是为包装grep的函数了
 			
 			// Otherwise, find the expression to execute
+			//m[0] = .example
+			//m[1] = .
+			//m[2] = example
 			else {
+				//f为 jQuery.className.has(a,m[2])
 				var f = jQuery.expr[m[1]];
 				if ( f.constructor != String )
 					f = jQuery.expr[m[1]][m[2]];
@@ -773,6 +787,11 @@ jQuery.extend({
 					"return " + f + "}");
 				
 				// Execute it against the current filter
+				//f 为 function(a,i){
+				//	return jQuery.className.has(a,m[2]) //m[2] 此时为'example'
+				//}
+				//再结合 g = function(a,f) {return jQuery.grep(a,f,true);};
+				//相当于jQuery.grep(r,f,true)
 				r = g( r, f );
 			}
 		}
