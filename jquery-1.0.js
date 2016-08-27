@@ -652,13 +652,16 @@ jQuery.extend({
 	
 			if ( t ) {
 				var val = jQuery.filter(t,r);
+				//fileter用来过滤 如 div#example
+				//先把div过滤掉 然后 根据通过正则取出 example
+				//再通过getAttribute('id') 比较id名称是否一样
 				ret = r = val.r;
 				t = jQuery.trim(val.t);
 			}
 		}
 	
-		if ( ret && ret[0] == context ) ret.shift();
-		done = jQuery.merge( done, ret );
+		if ( ret && ret[0] == context ) ret.shift();//弹出context返回数组原来的第一个元素的值 //该方法会改变数组的长度
+		done = jQuery.merge( done, ret );//合并数组
 	
 		return done;
 	},
