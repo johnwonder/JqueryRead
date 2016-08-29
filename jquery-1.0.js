@@ -980,14 +980,18 @@ jQuery.extend({
 			// Handle triggering a single element
 			} else if ( element["on" + type] ) {
 				// Pass along a fake event
+				//伪造一个事件
+				//unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
 				data.unshift( this.fix({ type: type, target: element }) );
 	
 				// Trigger the event
 				element["on" + type].apply( element, data );
 			}
 		},
-		
+		//把handle方法赋给元素的执行事件 onclick 
+		//然后在handle方法里遍历事件
 		handle: function(event) {
+			//alert(arguments[1]);
 			if ( typeof jQuery == "undefined" ) return;
 
 			event = event || jQuery.event.fix( window.event );
@@ -1241,6 +1245,7 @@ new function(){
 	// Go through all the event names, but make sure that
 	// it is enclosed properly
     //适当地封闭
+    //包装在一个function中执行
 	for ( var i = 0; i < e.length; i++ ) new function(){
 			
 		var o = e[i];
@@ -1255,6 +1260,7 @@ new function(){
 		jQuery.fn["un"+o] = function(f){ return this.unbind(o, f); };
 		
 		// Finally, handle events that only fire once
+		//绑定只能触发一次事件
 		jQuery.fn["one"+o] = function(f){
 			// Attach the event listener
 			return this.each(function(){

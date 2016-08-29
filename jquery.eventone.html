@@ -1,0 +1,34 @@
+<html>
+<head>
+<script src="jquery-1.0.js"></script>
+
+<script type="text/javascript">
+
+
+</script>
+
+
+</head>
+<body>
+<div id="root">
+<div id="grandparent" style="width:100px;height:100px;"> 
+</div>
+</div> 
+ <script type="text/javascript">
+ $("#root").click(function(event){
+ 	 alert('root click');
+ });
+ 	$("#grandparent").click(function(event){
+
+ 		alert(event[0]);
+ 		return false;//返回false root click不会触发
+ 	});
+
+ 	$("#grandparent").oneclick(function(event){
+ 		alert(20);//只会触发一次
+ 	});
+
+ 	$("#grandparent").trigger("click",['hello']);
+ </script>
+</body>
+</html>
